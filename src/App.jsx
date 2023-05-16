@@ -1,9 +1,17 @@
 import "./App.css";
 
+import { Route, Routes } from "react-router-dom";
+import Mockman from "mockman-js";
+
+import { HomePage } from "./pages/HomePage";
+
 function App() {
   return (
     <div className="App">
-      <h1>Hello</h1>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/mockman" element= {<Mockman />} />
+      </Routes>
     </div>
   );
 }
