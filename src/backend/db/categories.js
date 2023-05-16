@@ -8,20 +8,38 @@ import { v4 as uuid } from "uuid";
 export const categories = [
   {
     _id: uuid(),
-    categoryName: "fiction",
+    categoryName: "smartphones",
     description:
-      "literature in the form of prose, especially novels, that describes imaginary events and people",
+      "Smartphones are advanced mobile devices that offer a wide range of features and capabilities beyond traditional calling and texting.",
   },
   {
     _id: uuid(),
-    categoryName: "non-fiction",
+    categoryName: "laptops",
     description:
-      "Non-fiction is writing that gives information or describes real events, rather than telling a story.",
+      "Laptops are portable computers that offer users the flexibility to work, study, and engage in various activities on the go.",
   },
   {
     _id: uuid(),
-    categoryName: "horror",
+    categoryName: "fragrances",
     description:
-      "Meant to cause discomfort and fear for both the character and readers, horror writers often make use of supernatural and paranormal elements in morbid stories that are sometimes a little too realistic.",
+      "Fragrances, also known as perfumes or colognes, are scented products designed to enhance and personalize one's aroma.",
+  },
+  {
+    _id: uuid(),
+    categoryName: "skincare",
+    description:
+      "Skincare products are designed to promote healthy and radiant skin by addressing various concerns and maintaining its overall well-being.",
+  },
+  {
+    _id: uuid(),
+    categoryName: "groceries",
+    description:
+      "Groceries are everyday food and household items that are essential for our daily needs.",
+  },
+  {
+    _id: uuid(),
+    categoryName: "home-decoration",
+    description:
+      "Home decoration encompasses a variety of items and accessories that are used to enhance the aesthetic appeal and create a comfortable atmosphere within a living space.",
   },
 ];
