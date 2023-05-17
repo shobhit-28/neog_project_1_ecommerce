@@ -10,6 +10,18 @@ body>*:not(.header) {
     margin-top: 4.5rem;
 }
 
+@media only screen and (max-width: 715px) {
+    body>*:not(.header) {
+        margin-top: 5.5rem;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    body>*:not(.header) {
+        margin-top: 6.5rem;
+    }
+}
+
 body {
     font-family: 'Montserrat', sans-serif;
 }

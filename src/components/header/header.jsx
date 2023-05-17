@@ -1,11 +1,12 @@
 import { NavLink, Link } from "react-router-dom"
-import React, { useContext } from "react";
-import { FaSearch } from "react-icons/fa";
+import React, { useContext, useState } from "react";
+import { FaSearch, FaTimes, FaAlignJustify } from "react-icons/fa";
 import './header.css';
 import { ProductReducerContext } from "../../contexts/productReducerContext/productReducerContext";
 
 export const Header = () => {
     const { searchHandler, searchData } = useContext(ProductReducerContext);
+    const [menuState, setMenuState] = useState(false);
 
     return (
         <>
@@ -14,6 +15,9 @@ export const Header = () => {
                 <div className="search">
                     <input type="text" name="search" id="search" placeholder="search" onChange={searchHandler} />
                     <button><FaSearch /></button>
+                </div>
+                <div className="menuButtons">
+                    <button className="menuBtn" onClick={() => setMenuState(!menuState)}> {menuState ? <FaTimes /> : <FaAlignJustify />}  </button>
                 </div>
                 <nav className="nav-links">
                     <NavLink to='/products' className='nav-link'>Explore</NavLink>
@@ -31,7 +35,7 @@ export const Header = () => {
                         <div className="content">
                             <div className="title-price">
                                 <p className="product-title">{product.title}</p>
-                                <p className="product-price">{`₹ ${Math.round(((product.price * 82.34) - (product.price * 82.34) * (product.discountPercentage/100)) )}`}</p>
+                                <p className="product-price">{`₹ ${Math.round(((product.price * 82.34) - (product.price * 82.34) * (product.discountPercentage / 100)))}`}</p>
                             </div>
                             <p className="brand">
                                 {product.brand}
@@ -42,6 +46,14 @@ export const Header = () => {
                         </div>
                     </div>
                 ))}
+            </div>}
+            {menuState && <div className="menu-links">
+                <nav className="menu-nav-links">
+                    <NavLink to='/products' className='nav-link'>Explore</NavLink>
+                    <NavLink to='/wishlist' className='nav-link'>Wishlist</NavLink>
+                    <NavLink to='/cart' className='nav-link'>Cart</NavLink>
+                    <NavLink to='/sign-in' className='nav-link'>Login</NavLink>
+                </nav>
             </div>}
         </>
     )
