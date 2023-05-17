@@ -409,7 +409,7 @@ export const products = [
   },
   {
     id: uuid(),
-    title: "Orange Essence Food Flavou",
+    title: "Orange Essence Food Flavour",
     description: "Specifications of Orange Essence Food Flavour For Cakes and Baking Food Item",
     price: 14,
     discountPercentage: 8.04,

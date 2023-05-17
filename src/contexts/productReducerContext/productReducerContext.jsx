@@ -28,7 +28,7 @@ export const ProductReducerHandler = ({children}) => {
     }
 
     return(
-        <ProductReducerContext.Provider value={{searchHandler, state}}>
+        <ProductReducerContext.Provider value={{searchHandler, searchData: state.searchData}}>
             {children}
         </ProductReducerContext.Provider>
     )
