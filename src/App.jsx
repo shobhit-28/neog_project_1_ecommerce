@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import Mockman from "mockman-js";
 
 import { HomePage } from "./pages/HomePage";
-import { Header } from "./components/header";
+import { Header } from "./components/header/header";
 
 function App() {
   return (

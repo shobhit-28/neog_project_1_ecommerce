@@ -375,7 +375,7 @@ export const products = [
   },
   {
     id: uuid(),
-    title: "- Daal Masoor 500 grams",
+    title: "Daal Masoor 500 grams",
     description: "Fine quality Branded Product Keep in a cool and dry place",
     price: 20,
     discountPercentage: 4.81,
