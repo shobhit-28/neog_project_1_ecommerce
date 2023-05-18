@@ -1,6 +1,7 @@
 import { types } from './types';
 
 export const ProductReducer = (state, action) => {
+
     const {
         SEARCH
     } = types
@@ -16,12 +17,12 @@ export const ProductReducer = (state, action) => {
                             ?.filter(({ title }) => title.toLowerCase()?.includes(action?.payload?.input?.toLowerCase()))]
                 }
             } else {
-                return{
+                return {
                     ...state,
                     searchData: []
                 }
             }
-            
+
 
         default:
             return state;

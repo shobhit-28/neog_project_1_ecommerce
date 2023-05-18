@@ -1,12 +1,13 @@
-import { NavLink, Link } from "react-router-dom"
+import { NavLink, Link, useNavigate } from "react-router-dom"
 import React, { useContext, useState } from "react";
 import { FaSearch, FaTimes, FaAlignJustify } from "react-icons/fa";
 import './header.css';
 import { ProductReducerContext } from "../../contexts/productReducerContext/productReducerContext";
 
 export const Header = () => {
-    const { searchHandler, searchData } = useContext(ProductReducerContext);
+    const { searchHandler, searchData, isSearchModalOpen } = useContext(ProductReducerContext);
     const [menuState, setMenuState] = useState(false);
+    const navigate = useNavigate();
 
     return (
         <>
@@ -26,9 +27,9 @@ export const Header = () => {
                     <NavLink to='/sign-in' className='nav-link'>Login</NavLink>
                 </nav>
             </div>
-            {searchData.length > 0 && <div className="search-results">
+            {searchData.length > 0 && isSearchModalOpen && <div className="search-results">
                 {searchData.map((product) => (
-                    <div className="search-result">
+                    <div className="search-result" key={product?.id} onClick={() => navigate(`product/${product?.id}`)} >
                         <div className="img-container">
                             <img src={product?.thumbnail} alt={product?.title} />
                         </div>
@@ -46,15 +47,17 @@ export const Header = () => {
                         </div>
                     </div>
                 ))}
-            </div>}
-            {menuState && <div className="menu-links">
-                <nav className="menu-nav-links">
-                    <NavLink to='/products' className='nav-link'>Explore</NavLink>
-                    <NavLink to='/wishlist' className='nav-link'>Wishlist</NavLink>
-                    <NavLink to='/cart' className='nav-link'>Cart</NavLink>
-                    <NavLink to='/sign-in' className='nav-link'>Login</NavLink>
-                </nav>
-            </div>}
+            </div >}
+            {
+                menuState && <div className="menu-links">
+                    <nav className="menu-nav-links">
+                        <NavLink to='/products' className='nav-link'>Explore</NavLink>
+                        <NavLink to='/wishlist' className='nav-link'>Wishlist</NavLink>
+                        <NavLink to='/cart' className='nav-link'>Cart</NavLink>
+                        <NavLink to='/sign-in' className='nav-link'>Login</NavLink>
+                    </nav>
+                </div>
+            }
         </>
     )
 }
