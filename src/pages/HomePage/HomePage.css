@@ -33,6 +33,11 @@
 
         grid-template-rows: repeat(3, 1fr)
     }
+
+    .front-img .img-head {
+        line-height: 1.5rem;
+        font-size: 1.5rem;
+    }
 }
 
 @media only screen and (max-width: 715px) {

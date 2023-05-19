@@ -135,6 +135,7 @@
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 10px;
     border-radius: 0.25rem;
+    z-index: +2;
 
     &::-webkit-scrollbar {
         width: 10px;
