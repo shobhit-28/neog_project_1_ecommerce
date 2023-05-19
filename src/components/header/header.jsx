@@ -5,9 +5,19 @@ import './header.css';
 import { ProductReducerContext } from "../../contexts/productReducerContext/productReducerContext";
 
 export const Header = () => {
-    const { searchHandler, searchData, isSearchModalOpen } = useContext(ProductReducerContext);
+    const { searchHandler, searchData, isSearchModalOpen, searchBarData } = useContext(ProductReducerContext);
     const [menuState, setMenuState] = useState(false);
     const navigate = useNavigate();
+
+    const searchClickHandler = () => {
+        if (searchBarData.length === 0) {
+            alert ('Enter a keyword or product name in the search bar above to start exploring.')
+        } else if (searchData.length === 0) {
+            alert ("Oops! We couldn't find any items matching your search criteria. Please try a different search term or browse through our categories to find what you're looking for.")
+        } else {
+            navigate('search')
+        }
+    }
 
     return (
         <>
@@ -15,7 +25,7 @@ export const Header = () => {
                 <Link to='/' className="nav-head">Raj-Kart</Link>
                 <div className="search">
                     <input type="text" name="search" id="search" placeholder="search" onChange={searchHandler} />
-                    <button><FaSearch /></button>
+                    <button onClick={searchClickHandler}><FaSearch /></button>
                 </div>
                 <div className="menuButtons">
                     <button className="menuBtn" onClick={() => setMenuState(!menuState)}> {menuState ? <FaTimes /> : <FaAlignJustify />}  </button>

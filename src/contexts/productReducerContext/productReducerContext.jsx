@@ -10,7 +10,8 @@ export const ProductReducerContext = createContext();
 export const ProductReducerHandler = ({ children }) => {
     const { responseData } = useContext(DataContext);
     
-    const [isSearchModalOpen, setIsSearchModalOpen] = useState(false)
+    const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
+    const [searchBarData, setSearchBarData] = useState('')
     
     const initialState = {
         searchData: []
@@ -24,6 +25,7 @@ export const ProductReducerHandler = ({ children }) => {
 
     const searchHandler = (event) => {
         setIsSearchModalOpen(true)
+        setSearchBarData(event.target.value)
         dispatch({
             type: SEARCH,
             payload: { input: event.target.value, data: responseData?.productData?.products}
@@ -35,7 +37,8 @@ export const ProductReducerHandler = ({ children }) => {
             searchHandler, 
             searchData: state.searchData,
             isSearchModalOpen,
-            setIsSearchModalOpen
+            setIsSearchModalOpen,
+            searchBarData
         }}>
             {children}
         </ProductReducerContext.Provider>

@@ -4,6 +4,7 @@ import './HomePage.css'
 
 export const HomePage = () => {
     const { responseData } = useContext(DataContext);
+    
     return (
         <div className="landing-page">
             <div className="front-img">
