@@ -1,0 +1,19 @@
+.category-page {
+    margin-top: 4.5rem;
+}
+
+.category-page .product-by-category h1 {
+    text-decoration: none;
+}
+
+@media only screen and (max-width: 715px) {
+    .category-page {
+        margin-top: 5.5rem;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    .category-page {
+        margin-top: 6.5rem;
+    }
+}

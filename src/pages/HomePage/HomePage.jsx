@@ -1,9 +1,11 @@
 import { useContext } from "react"
 import { DataContext } from "../../contexts/dataContext"
 import './HomePage.css'
+import { useNavigate } from "react-router"
 
 export const HomePage = () => {
     const { responseData } = useContext(DataContext);
+    const navigate = useNavigate();
     
     return (
         <div className="landing-page">
@@ -18,11 +20,11 @@ export const HomePage = () => {
             </div>
             <div className="categories-parent">
                 {responseData?.productCategories?.categories?.map((category) => (
-                    <div className="categories" key={category?.id}>
+                    <div className="categories" key={category?.id} onClick={() => navigate(`category/${category?.categoryName}`)} >
                         <div className="img-container">
                             <img src={category?.image} alt="" />
                         </div>
-                        <p className="category-head">{category?.categoryName}</p>
+                        <p className="category-head">{category?.categoryName.toUpperCase()}</p>
                     </div>
                 ))}
             </div>

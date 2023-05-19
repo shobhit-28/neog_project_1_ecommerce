@@ -7,6 +7,7 @@ import { Header } from "./components/header/header";
 import { ProductPage } from "./pages/ProductPage";
 import { Footer } from "./components/footer/footer";
 import { SearchPage } from "./pages/searchPage/searchPage";
+import { CategoryPage } from "./pages/categoryPage/categoryPage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/mockman" element= {<Mockman />} />
         <Route path="/product/:productID" element={<ProductPage />} />
         <Route path="/search" element={<SearchPage />} />
+        <Route path="/category/:categoryName" element={<CategoryPage />} />
       </Routes>
       <Footer />
     </div>
