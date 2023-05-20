@@ -6,7 +6,6 @@ import { makeServer } from "./server";
 import { BrowserRouter } from "react-router-dom";
 import { DataHandler } from "./contexts/dataContext";
 import { ProductReducerHandler } from "./contexts/productReducerContext/productReducerContext";
-import { Filters } from "./components/filters/filters";
 
 // Call make Server
 makeServer();
