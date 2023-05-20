@@ -3,7 +3,7 @@ import { types } from './types';
 export const ProductReducer = (state, action) => {
 
     const {
-        SEARCH
+        SEARCH,
     } = types
 
     switch (action.type) {
@@ -22,7 +22,6 @@ export const ProductReducer = (state, action) => {
                     searchData: []
                 }
             }
-
 
         default:
             return state;

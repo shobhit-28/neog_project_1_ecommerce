@@ -15,11 +15,10 @@ export const ProductReducerHandler = ({ children }) => {
     
     const initialState = {
         searchData: [], 
-        checked: [],
     };
 
     const {
-        SEARCH
+        SEARCH,
     } = types
 
     const [state, dispatch] = useReducer(ProductReducer, initialState);
@@ -32,14 +31,14 @@ export const ProductReducerHandler = ({ children }) => {
             payload: { input: event.target.value, data: responseData?.productData?.products}
         })
     }
-
+    
     return (
         <ProductReducerContext.Provider value={{
             searchHandler, 
             searchData: state.searchData,
             isSearchModalOpen,
             setIsSearchModalOpen,
-            searchBarData
+            searchBarData,
         }}>
             {children}
         </ProductReducerContext.Provider>

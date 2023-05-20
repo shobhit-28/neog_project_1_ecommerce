@@ -1,8 +1,14 @@
 import './filters.css'
 
-export const Filters = ({ productData }) => {
+
+export const Filters = ({ productData, setFilteredData }) => {
     const checkBoxArr = [...new Set(productData?.map(({ brand }) => brand))]
-    const maxPrice = productData?.reduce((acc, curr) => acc > curr?.price ? acc : curr?.price ,0);
+    const maxPrice = productData?.reduce((acc, curr) => acc > curr?.price ? acc : curr?.price, 0);
+
+    const changeHandler = (event) => {
+        setFilteredData(productData?.filter(({price}) => price <= event.target.value ))
+    }
+
     return (
         <div className="filters">
             <p className="filters-head">Filters</p>
@@ -10,10 +16,10 @@ export const Filters = ({ productData }) => {
                 <p>Price</p>
                 <div className="prices">
                     <p>0</p>
-                    <p>{Math.round(maxPrice/2)}</p>
+                    <p>{Math.round(maxPrice / 2)}</p>
                     <p>{Math.round(maxPrice)}</p>
                 </div>
-                <input type="range" className="price-slider" min='0' max={maxPrice + 1} defaultValue={maxPrice + 1} />
+                <input type="range" className="price-slider" min='0' max={maxPrice + 1} defaultValue={maxPrice + 1} onChange={changeHandler}/>
             </label>}
             <div className="brand-section">
                 <p>Brands</p>
@@ -30,11 +36,11 @@ export const Filters = ({ productData }) => {
             </div>
             <div className="sort-by-rating">
                 <p>Sort By Price</p>
-                <label><input type="radio" name="rating" id="" value={5}/>5 stars and below</label>
-                <label><input type="radio" name="rating" id="" value={4}/>4 stars and below</label>
-                <label><input type="radio" name="rating" id="" value={3}/>3 stars and below</label>
-                <label><input type="radio" name="rating" id="" value={2}/>2 stars and below</label>
-                <label><input type="radio" name="rating" id="" value={1}/>1 stars and below</label>
+                <label><input type="radio" name="rating" id="" value={5} />5 stars and below</label>
+                <label><input type="radio" name="rating" id="" value={4} />4 stars and below</label>
+                <label><input type="radio" name="rating" id="" value={3} />3 stars and below</label>
+                <label><input type="radio" name="rating" id="" value={2} />2 stars and below</label>
+                <label><input type="radio" name="rating" id="" value={1} />1 stars and below</label>
             </div>
         </div>
     )
