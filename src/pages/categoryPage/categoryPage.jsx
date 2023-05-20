@@ -8,6 +8,7 @@ export const CategoryPage = () => {
     const {categoryName} = useParams();
     const {setIsSearchModalOpen} = useContext(ProductReducerContext);
     const {responseData} = useContext(DataContext);
+    const category = responseData?.productCategories?.categories?.find((category) => category?.categoryName === categoryName );
     
     useEffect(() => {
         setIsSearchModalOpen(false)
@@ -15,7 +16,11 @@ export const CategoryPage = () => {
     }, [])
   return (
     <div className="category-page">
-        <h2>{categoryName}</h2>
+        <div className="category-front" style={{backgroundImage: `url(${category?.image})`}}>
+            <p className="category-title">
+                {category?.categoryName}
+            </p>
+        </div>
         {responseData?.productData?.products?.filter(({category}) => category === categoryName ).map((product) => (
             <div className="product-by-category" key={product?.id}>
                 <p className="product-title">

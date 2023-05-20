@@ -32,7 +32,7 @@ export const categories = [
     categoryName: "skincare",
     description:
       "Skincare products are designed to promote healthy and radiant skin by addressing various concerns and maintaining its overall well-being.",
-    image: 'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=435&q=80'
+    image: 'https://images.unsplash.com/photo-1629380108599-ea06489d66f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'
   },
   {
     _id: uuid(),
