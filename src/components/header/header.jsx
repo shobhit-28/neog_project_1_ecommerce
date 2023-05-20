@@ -46,7 +46,7 @@ export const Header = () => {
                         <div className="content">
                             <div className="title-price">
                                 <p className="product-title">{product.title}</p>
-                                <p className="product-price">{`₹ ${Math.round(((product.price * 82.34) - (product.price * 82.34) * (product.discountPercentage / 100)))}`}</p>
+                                <p className="product-price">{`₹ ${Math.round((product?.price - (product?.price * (product.discountPercentage / 100))))}`}</p>
                             </div>
                             <p className="brand">
                                 {product.brand}

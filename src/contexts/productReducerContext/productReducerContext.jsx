@@ -14,7 +14,8 @@ export const ProductReducerHandler = ({ children }) => {
     const [searchBarData, setSearchBarData] = useState('')
     
     const initialState = {
-        searchData: []
+        searchData: [], 
+        checked: [],
     };
 
     const {
