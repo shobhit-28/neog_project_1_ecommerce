@@ -6,6 +6,7 @@ export const DataHandler = ({ children }) => {
     const [responseData, setResponseData] = useState({ productData: [], productCategories: [] });
     const [isLoggedIn, setIsLoggedIn] = useState(false)
 
+
     const fetchProductsData = async () => {
         try {
             const data = await fetch('/api/products')
@@ -23,12 +24,12 @@ export const DataHandler = ({ children }) => {
                 password: "shobhit28",
             }
 
-            const loginData = await fetch('/api/auth/login', {
+            const response = await fetch('/api/auth/login', {
                 method: 'POST',
                 body: JSON.stringify(testCreds)
             });
 
-            const userData = await loginData.json();
+            const userData = await response.json();
             localStorage.setItem('encodedToken', userData?.encodedToken);
             setIsLoggedIn(true)
 
@@ -42,6 +43,23 @@ export const DataHandler = ({ children }) => {
         setIsLoggedIn(false)
     }
 
+    const signUp = async (signupInputData, isValid) => {
+        if (isValid?.isEmail && isValid?.isPassword && isValid?.isPassAndConfirmPassEqual && isValid?.isName) {
+            try {
+                const response = await fetch('/api/auth/signup', {
+                    method: 'POST',
+                    body: JSON.stringify(signupInputData)
+                });
+
+                const data = await response.json();
+                localStorage.setItem('encodedToken', data?.encodedToken);
+                setIsLoggedIn(true)
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    }
+
     useEffect(() => {
         fetchProductsData()
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,7 +70,8 @@ export const DataHandler = ({ children }) => {
             responseData,
             testLogin,
             isLoggedIn,
-            logOut
+            logOut,
+            signUp
         }}>
             {children}
         </DataContext.Provider>

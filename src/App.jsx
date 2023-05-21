@@ -9,6 +9,7 @@ import { Footer } from "./components/footer/footer";
 import { SearchPage } from "./pages/searchPage/searchPage";
 import { CategoryPage } from "./pages/categoryPage/categoryPage";
 import { Login } from "./pages/login/login";
+import { SignupPage } from "./pages/signup/signupPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/search" element={<SearchPage />} />
         <Route path="/category/:categoryName" element={<CategoryPage />} />
         <Route path="login" element={<Login />} />
+        <Route path="sign-up" element={<SignupPage />} />
       </Routes>
       <Footer />
     </div>
