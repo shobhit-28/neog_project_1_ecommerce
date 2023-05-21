@@ -34,7 +34,7 @@ export const Header = () => {
                     <NavLink to='/products' className='nav-link'>Explore</NavLink>
                     <NavLink to='/wishlist' className='nav-link'>Wishlist</NavLink>
                     <NavLink to='/cart' className='nav-link'>Cart</NavLink>
-                    <NavLink to='/sign-in' className='nav-link'>Login</NavLink>
+                    <NavLink to='/login' className='nav-link'>Login</NavLink>
                 </nav>
             </div>
             {searchData.length > 0 && isSearchModalOpen && <div className="search-results">
@@ -64,7 +64,7 @@ export const Header = () => {
                         <NavLink to='/products' className='nav-link'>Explore</NavLink>
                         <NavLink to='/wishlist' className='nav-link'>Wishlist</NavLink>
                         <NavLink to='/cart' className='nav-link'>Cart</NavLink>
-                        <NavLink to='/sign-in' className='nav-link'>Login</NavLink>
+                        <NavLink to='/login' className='nav-link'>Login</NavLink>
                     </nav>
                 </div>
             }
