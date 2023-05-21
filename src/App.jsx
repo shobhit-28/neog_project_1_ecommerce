@@ -26,7 +26,7 @@ function App() {
         <Route path="/product/:productID" element={<ProductPage />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/category/:categoryName" element={<CategoryPage />} />
-        <Route path="login" element={<Login />} />
+        <Route path="login" element={isLoggedIn? <Navigate to="/" /> :<Login />} />
         <Route path="sign-up" element={isLoggedIn? <Navigate to="/" /> : <SignupPage />} />
       </Routes>
       <Footer />

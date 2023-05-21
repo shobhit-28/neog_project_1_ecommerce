@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import { AuthContext } from '../../contexts/authContext';
 
 export const Login = () => {
-    const { testLogin, logOut, isLoggedIn } = useContext(AuthContext);
+    const { testLogin, logOut, isLoggedIn, login } = useContext(AuthContext);
 
     const navigate = useNavigate()
 
@@ -38,7 +38,7 @@ export const Login = () => {
                     </>
                     :
                     <>
-                        <button className="login">Login</button>
+                        <button className="login" onClick={() => login(loginInputData)} >Login</button>
                         <button className="test-login" onClick={testLogin}>Test Login</button>
                         <button className="signup" onClick={() => navigate('/sign-up')}>Sign Up</button>
                     </>}

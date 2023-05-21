@@ -26,6 +26,25 @@ export const AuthenticationHandler = ({ children }) => {
         }
     }
 
+    const login = async (loginInputData) => {
+        try {
+            const response = await fetch('/api/auth/login', {
+                method: 'POST',
+                body: JSON.stringify(loginInputData)
+            });
+
+            const userData = await response.json();
+            if (userData?.encodedToken) {
+                localStorage.setItem('encodedToken', userData?.encodedToken);
+                setIsLoggedIn(true)
+            } else {
+                console.log(userData?.errors);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     const logOut = () => {
         localStorage.removeItem("encodedToken");
         setIsLoggedIn(false)
@@ -53,7 +72,8 @@ export const AuthenticationHandler = ({ children }) => {
             testLogin,
             isLoggedIn,
             logOut,
-            signUp
+            signUp,
+            login
         }}>
             {children}
         </AuthContext.Provider>
