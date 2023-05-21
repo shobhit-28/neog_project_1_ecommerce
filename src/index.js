@@ -6,6 +6,7 @@ import { makeServer } from "./server";
 import { BrowserRouter } from "react-router-dom";
 import { DataHandler } from "./contexts/dataContext";
 import { ProductReducerHandler } from "./contexts/productReducerContext/productReducerContext";
+import { AuthenticationHandler } from "./contexts/authContext";
 
 // Call make Server
 makeServer();
@@ -15,7 +16,9 @@ ReactDOM.render(
     <BrowserRouter>
       <DataHandler>
         <ProductReducerHandler>
+          <AuthenticationHandler>
             <App />
+          </AuthenticationHandler>
         </ProductReducerHandler>
       </DataHandler>
     </BrowserRouter>

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { DataContext } from "./contexts/dataContext";
+import { AuthContext } from "./contexts/authContext";
 
 import { Route, Routes, Navigate } from "react-router-dom";
 import Mockman from "mockman-js";
@@ -15,8 +15,7 @@ import { SignupPage } from "./pages/signup/signupPage";
 
 function App() {
 
-  const {isLoggedIn} = useContext(DataContext);
-  console.log(isLoggedIn)
+  const {isLoggedIn} = useContext(AuthContext);
 
   return (
     <div className="App">

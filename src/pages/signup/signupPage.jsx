@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
 import './signupPage.css'
-import { DataContext } from '../../contexts/dataContext'
 import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../../contexts/authContext'
 
 export const SignupPage = () => {
     const navigate = useNavigate();
@@ -10,7 +10,7 @@ export const SignupPage = () => {
     const [isValid, setIsValid] = useState({ isEmail: false, isPassword: false, isPassAndConfirmPassEqual: false, isName: false })
     const [showErrors, setShowErrors] = useState(false);
 
-    const { signUp, isLoggedIn } = useContext(DataContext)
+    const { signUp, isLoggedIn } = useContext(AuthContext)
 
     const isEmail = (email) =>
         /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,3}$/i.test(email);
