@@ -24,13 +24,6 @@
     display: flex;
 }
 
-/* .filters {
-
-} */
-
-/* .products {
-
-} */
 
 
 /* Filters section */
@@ -46,9 +39,27 @@
 }
 
 .filters p {
-    margin: 0.5rem 0.25rem;
+    font-size: 1.05rem;
+    font-weight: 500;
 }
 
-.filters div {
+.filters div:not(.prices){
     width: 100%;
+    margin: 1rem 0;
+}
+
+.filters .filter-head {
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.filters .prices {
+    display: flex;
+    justify-content: space-between;
+}
+
+.filters .price-slider input {
+    width: 100%;
+    cursor: e-resize;
 }

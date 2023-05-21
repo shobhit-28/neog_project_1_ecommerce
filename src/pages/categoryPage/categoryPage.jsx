@@ -3,6 +3,7 @@ import './categoryPage.css'
 import { useContext, useEffect, useState } from 'react';
 import { ProductReducerContext } from '../../contexts/productReducerContext/productReducerContext';
 import { DataContext } from '../../contexts/dataContext';
+import { Products } from '../../components/products/products';
 // import { Filters } from '../../components/filters/filters';
 
 export const CategoryPage = () => {
@@ -89,13 +90,13 @@ export const CategoryPage = () => {
             <div className="contents">
                 <div className="category-filters">
                     <div className="filters">
-                        <p className="filters-head">Filters</p>
+                        <p className="filter-head">Filters</p>
                         {maxPrice && <label className='price-slider'>
                             <p>Price</p>
                             <div className="prices">
                                 <p>0</p>
-                                <p>{Math.round(maxPrice / 2)}</p>
-                                <p>{Math.round(maxPrice)}</p>
+                                <p>₹ {Math.round(maxPrice / 2)}</p>
+                                <p>₹ {Math.round(maxPrice)}</p>
                             </div>
                             <input type="range" className="price-slider" min='0' max={maxPrice + 1} defaultValue={maxPrice + 1} onChange={priceChangeHandler} />
                         </label>}
@@ -130,20 +131,12 @@ export const CategoryPage = () => {
                                 </div>
 
                                 : filteredData?.map((product) => (
-                                    <div className="product-by-category" key={product?.id}>
-                                        <p className="product-title">
-                                            {product?.title}
-                                        </p>
-                                    </div>
+                                    <Products product={product} key={product?.id}/>
                                 ))
 
                             :
                             products?.map((product) => (
-                                <div className="product-by-category" key={product?.id}>
-                                    <p className="product-title">
-                                        {product?.title}
-                                    </p>
-                                </div>
+                                <Products product={product} key={product?.id}/>
                             ))
                     }
                 </div>
