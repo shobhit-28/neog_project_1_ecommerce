@@ -4,8 +4,7 @@ export const DataContext = createContext();
 
 export const DataHandler = ({ children }) => {
     const [responseData, setResponseData] = useState({ productData: [], productCategories: [] });
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
-
+    const [isLoggedIn, setIsLoggedIn] = useState(localStorage?.getItem('encodedToken')?.length > 0)
 
     const fetchProductsData = async () => {
         try {

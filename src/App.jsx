@@ -1,5 +1,7 @@
+import { useContext } from "react";
+import { DataContext } from "./contexts/dataContext";
 
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Mockman from "mockman-js";
 
 import { HomePage } from "./pages/HomePage/HomePage";
@@ -12,6 +14,10 @@ import { Login } from "./pages/login/login";
 import { SignupPage } from "./pages/signup/signupPage";
 
 function App() {
+
+  const {isLoggedIn} = useContext(DataContext);
+  console.log(isLoggedIn)
+
   return (
     <div className="App">
       <Header />
@@ -22,7 +28,7 @@ function App() {
         <Route path="/search" element={<SearchPage />} />
         <Route path="/category/:categoryName" element={<CategoryPage />} />
         <Route path="login" element={<Login />} />
-        <Route path="sign-up" element={<SignupPage />} />
+        <Route path="sign-up" element={isLoggedIn? <Navigate to="/" /> : <SignupPage />} />
       </Routes>
       <Footer />
     </div>
