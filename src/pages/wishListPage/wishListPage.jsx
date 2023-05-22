@@ -5,8 +5,6 @@ import { WishListContext } from '../../contexts/wishListContext'
 export const WishListPage = () => {
     const { wishListData, removeFromWishlist } = useContext(WishListContext);
 
-    console.log(wishListData)
-
     return (
         <div className="wishlist-page">
             <p className="heading">Wishlist</p>
