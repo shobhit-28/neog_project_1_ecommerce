@@ -18,7 +18,7 @@ export const Header = () => {
         } else if (searchData.length === 0) {
             alert("Oops! We couldn't find any items matching your search criteria. Please try a different search term or browse through our categories to find what you're looking for.")
         } else {
-            navigate('search')
+            navigate('/search')
         }
     }
 
