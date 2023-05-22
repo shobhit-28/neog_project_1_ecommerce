@@ -15,6 +15,7 @@ import { SignupPage } from "./pages/signup/signupPage";
 import { ProfilePage } from "./pages/profilePage/profilePage";
 import { RequiresAuth } from "./requiresAuth/requiresAuth";
 import { WishListPage } from "./pages/wishListPage/wishListPage";
+import { CartPage } from "./pages/cartPage/cartPage";
 
 function App() {
 
@@ -36,13 +37,10 @@ function App() {
             ? <Navigate to={location?.state?.from?.pathname} />
             : <Navigate to="/" />
           : <Login />} />
-        <Route path="/sign-up" element={isLoggedIn
-          ? (location?.state !== null)
-            ? <Navigate to={location?.state?.from?.pathname} />
-            : <Navigate to="/" />
-          : <SignupPage />} />
+        <Route path="/sign-up" element={isLoggedIn ? <Navigate to="/" /> : <SignupPage />} />
         <Route path="/profile" element={isLoggedIn ? <ProfilePage /> : <Navigate to='/login' />} />
         <Route path="/wishlist" element={<RequiresAuth><WishListPage /></RequiresAuth>} />
+        <Route path="/cart" element={<RequiresAuth><CartPage /></RequiresAuth>} />
       </Routes>
       <Footer />
     </div>

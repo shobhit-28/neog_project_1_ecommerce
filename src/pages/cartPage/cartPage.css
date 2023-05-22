@@ -1,0 +1,15 @@
+.cart-page {
+    margin-top: 4.5rem;
+}
+
+@media only screen and (max-width: 715px) {
+    .cart-page {
+        margin-top: 5.5rem;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    .cart-page {
+        margin-top: 6.5rem;
+    }
+}
