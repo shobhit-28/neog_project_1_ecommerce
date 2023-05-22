@@ -37,7 +37,7 @@ export const AuthenticationHandler = ({ children }) => {
             const data = await response.json();
             if (data?.encodedToken) {
                 localStorage.setItem('encodedToken', data?.encodedToken);
-                localStorage.setItem('userName', `${data?.foundUser?.firstName} ${data?.foundUser?.lastName}`)
+                localStorage.setItem('userName', data?.foundUser?.name)
                 localStorage.setItem('userEmail', data?.foundUser?.email)
                 setIsLoggedIn(true)
             } else {
@@ -63,8 +63,8 @@ export const AuthenticationHandler = ({ children }) => {
 
                 const data = await response.json();
                 localStorage.setItem('encodedToken', data?.encodedToken);
-                localStorage.setItem('userName', `${data?.foundUser?.firstName} ${data?.foundUser?.lastName}`)
-                localStorage.setItem('userEmail', data?.foundUser?.email)
+                localStorage.setItem('userName', data?.createdUser?.name)
+                localStorage.setItem('userEmail', data?.createdUser?.email)
                 setIsLoggedIn(true)
             } catch (error) {
                 console.error(error);

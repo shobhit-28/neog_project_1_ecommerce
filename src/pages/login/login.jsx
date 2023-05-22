@@ -18,6 +18,10 @@ export const Login = () => {
         setLoginInputData({ ...loginInputData, password: event.target.value })
     }
 
+    const signUpClickHandler = () => {
+        navigate('/sign-up')
+    }
+
     return (
         <div className="login-page">
             <div className="login-modal">
@@ -34,7 +38,7 @@ export const Login = () => {
                 <div className='buttons'>
                     <button className="login" onClick={() => login(loginInputData)} >Login</button>
                     <button className="test-login" onClick={testLogin}>Test Login</button>
-                    <button className="signup" onClick={() => navigate('/sign-up')}>Sign Up</button>
+                    <button className="signup" onClick={signUpClickHandler}>Sign Up</button>
                 </div>
             </div>
         </div>
