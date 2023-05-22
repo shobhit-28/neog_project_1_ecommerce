@@ -8,8 +8,8 @@ export const AuthenticationHandler = ({ children }) => {
     const testLogin = async () => {
         try {
             const testCreds = {
-                email: "shobhitraj34.com",
-                password: "shobhit28",
+                email: "shobhitraj34@gmail.com",
+                password: "shohehe",
             }
 
             const response = await fetch('/api/auth/login', {
