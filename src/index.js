@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import { DataHandler } from "./contexts/dataContext";
 import { ProductReducerHandler } from "./contexts/productReducerContext/productReducerContext";
 import { AuthenticationHandler } from "./contexts/authContext";
+import { WishListHandler } from "./contexts/wishListContext";
 
 // Call make Server
 makeServer();
@@ -17,7 +18,9 @@ ReactDOM.render(
       <DataHandler>
         <ProductReducerHandler>
           <AuthenticationHandler>
-            <App />
+            <WishListHandler>
+              <App />
+            </WishListHandler>
           </AuthenticationHandler>
         </ProductReducerHandler>
       </DataHandler>
