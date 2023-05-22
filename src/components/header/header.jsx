@@ -3,17 +3,20 @@ import React, { useContext, useState } from "react";
 import { FaSearch, FaTimes, FaAlignJustify } from "react-icons/fa";
 import './header.css';
 import { ProductReducerContext } from "../../contexts/productReducerContext/productReducerContext";
+import { AuthContext } from "../../contexts/authContext";
 
 export const Header = () => {
     const { searchHandler, searchData, isSearchModalOpen, searchBarData } = useContext(ProductReducerContext);
+    const { isLoggedIn } = useContext(AuthContext)
+
     const [menuState, setMenuState] = useState(false);
     const navigate = useNavigate();
 
     const searchClickHandler = () => {
         if (searchBarData.length === 0) {
-            alert ('Enter a keyword or product name in the search bar above to start exploring.')
+            alert('Enter a keyword or product name in the search bar above to start exploring.')
         } else if (searchData.length === 0) {
-            alert ("Oops! We couldn't find any items matching your search criteria. Please try a different search term or browse through our categories to find what you're looking for.")
+            alert("Oops! We couldn't find any items matching your search criteria. Please try a different search term or browse through our categories to find what you're looking for.")
         } else {
             navigate('search')
         }
@@ -34,7 +37,11 @@ export const Header = () => {
                     <NavLink to='/products' className='nav-link'>Explore</NavLink>
                     <NavLink to='/wishlist' className='nav-link'>Wishlist</NavLink>
                     <NavLink to='/cart' className='nav-link'>Cart</NavLink>
-                    <NavLink to='/login' className='nav-link'>Login</NavLink>
+                    {isLoggedIn
+                        ?
+                        <NavLink to='/profile' className='nav-link'>Profile</NavLink>
+                        :
+                        <NavLink to='/login' className='nav-link'>Login</NavLink>}
                 </nav>
             </div>
             {searchData.length > 0 && isSearchModalOpen && <div className="search-results">

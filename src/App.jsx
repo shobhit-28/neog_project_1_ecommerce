@@ -12,6 +12,7 @@ import { SearchPage } from "./pages/searchPage/searchPage";
 import { CategoryPage } from "./pages/categoryPage/categoryPage";
 import { Login } from "./pages/login/login";
 import { SignupPage } from "./pages/signup/signupPage";
+import { ProfilePage } from "./pages/profilePage/profilePage";
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
         <Route path="/category/:categoryName" element={<CategoryPage />} />
         <Route path="login" element={isLoggedIn? <Navigate to="/" /> :<Login />} />
         <Route path="sign-up" element={isLoggedIn? <Navigate to="/" /> : <SignupPage />} />
+        <Route path="profile" element={isLoggedIn ? <ProfilePage /> : <Navigate to='/login' />} />
       </Routes>
       <Footer />
     </div>

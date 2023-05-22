@@ -4,18 +4,18 @@ import { useNavigate } from 'react-router';
 import { AuthContext } from '../../contexts/authContext';
 
 export const Login = () => {
-    const { testLogin, logOut, isLoggedIn, login } = useContext(AuthContext);
+    const { testLogin, login } = useContext(AuthContext);
 
     const navigate = useNavigate()
 
     const [loginInputData, setLoginInputData] = useState({ email: '', password: '' })
 
     const emailChangeHandler = (event) => {
-        setLoginInputData({...loginInputData, email: event.target.value})
+        setLoginInputData({ ...loginInputData, email: event.target.value })
     }
 
     const passwordChangeHandler = (event) => {
-        setLoginInputData({...loginInputData, password: event.target.value})
+        setLoginInputData({ ...loginInputData, password: event.target.value })
     }
 
     return (
@@ -31,17 +31,11 @@ export const Login = () => {
                         <input type="password" name="" id="password" onChange={passwordChangeHandler} />
                     </label>
                 </form>
-                {isLoggedIn
-                    ?
-                    <>
-                        <button className="logout" onClick={logOut}>Logout</button>
-                    </>
-                    :
-                    <>
-                        <button className="login" onClick={() => login(loginInputData)} >Login</button>
-                        <button className="test-login" onClick={testLogin}>Test Login</button>
-                        <button className="signup" onClick={() => navigate('/sign-up')}>Sign Up</button>
-                    </>}
+                <div className='buttons'>
+                    <button className="login" onClick={() => login(loginInputData)} >Login</button>
+                    <button className="test-login" onClick={testLogin}>Test Login</button>
+                    <button className="signup" onClick={() => navigate('/sign-up')}>Sign Up</button>
+                </div>
             </div>
         </div>
     )

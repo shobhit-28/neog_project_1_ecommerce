@@ -17,10 +17,11 @@ export const AuthenticationHandler = ({ children }) => {
                 body: JSON.stringify(testCreds)
             });
 
-            const userData = await response.json();
-            localStorage.setItem('encodedToken', userData?.encodedToken);
+            const data = await response.json();
+            localStorage.setItem('encodedToken', data?.encodedToken);
+            localStorage.setItem('userName', `${data?.foundUser?.firstName} ${data?.foundUser?.lastName}`)
+            localStorage.setItem('userEmail', data?.foundUser?.email)
             setIsLoggedIn(true)
-
         } catch (error) {
             console.error(error);
         }
@@ -33,12 +34,14 @@ export const AuthenticationHandler = ({ children }) => {
                 body: JSON.stringify(loginInputData)
             });
 
-            const userData = await response.json();
-            if (userData?.encodedToken) {
-                localStorage.setItem('encodedToken', userData?.encodedToken);
+            const data = await response.json();
+            if (data?.encodedToken) {
+                localStorage.setItem('encodedToken', data?.encodedToken);
+                localStorage.setItem('userName', `${data?.foundUser?.firstName} ${data?.foundUser?.lastName}`)
+                localStorage.setItem('userEmail', data?.foundUser?.email)
                 setIsLoggedIn(true)
             } else {
-                console.log(userData?.errors);
+                console.log(data?.errors);
             }
         } catch (error) {
             console.error(error);
@@ -46,7 +49,7 @@ export const AuthenticationHandler = ({ children }) => {
     }
 
     const logOut = () => {
-        localStorage.removeItem("encodedToken");
+        localStorage.clear();
         setIsLoggedIn(false)
     }
 
@@ -60,6 +63,8 @@ export const AuthenticationHandler = ({ children }) => {
 
                 const data = await response.json();
                 localStorage.setItem('encodedToken', data?.encodedToken);
+                localStorage.setItem('userName', `${data?.foundUser?.firstName} ${data?.foundUser?.lastName}`)
+                localStorage.setItem('userEmail', data?.foundUser?.email)
                 setIsLoggedIn(true)
             } catch (error) {
                 console.error(error);
@@ -73,7 +78,7 @@ export const AuthenticationHandler = ({ children }) => {
             isLoggedIn,
             logOut,
             signUp,
-            login
+            login,
         }}>
             {children}
         </AuthContext.Provider>
