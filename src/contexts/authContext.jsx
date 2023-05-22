@@ -3,8 +3,10 @@ import { createContext, useState } from "react";
 export const AuthContext = createContext();
 
 export const AuthenticationHandler = ({ children }) => {
-    const [isLoggedIn, setIsLoggedIn] = useState(localStorage?.getItem('encodedToken')?.length > 0)
 
+    const [isLoggedIn, setIsLoggedIn] = useState(localStorage?.getItem('encodedToken')?.length > 0)
+    const [wishlistedIds, setWishlistedIds] = useState([])
+    
     const testLogin = async () => {
         try {
             const testCreds = {
@@ -22,6 +24,7 @@ export const AuthenticationHandler = ({ children }) => {
             localStorage.setItem('userName', `${data?.foundUser?.firstName} ${data?.foundUser?.lastName}`)
             localStorage.setItem('userEmail', data?.foundUser?.email)
             setIsLoggedIn(true)
+            data?.foundUser?.wishlist?.length > 0 ? setWishlistedIds(data?.foundUser?.wishlist?.map(({_id}) => _id )) : setWishlistedIds([])
         } catch (error) {
             console.error(error);
         }
@@ -40,6 +43,7 @@ export const AuthenticationHandler = ({ children }) => {
                 localStorage.setItem('userName', data?.foundUser?.name)
                 localStorage.setItem('userEmail', data?.foundUser?.email)
                 setIsLoggedIn(true)
+                data?.foundUser?.wishlist?.length > 0 ? setWishlistedIds(data?.foundUser?.wishlist?.map(({_id}) => _id )) : setWishlistedIds([])
             } else {
                 console.log(data?.errors);
             }
@@ -66,6 +70,7 @@ export const AuthenticationHandler = ({ children }) => {
                 localStorage.setItem('userName', data?.createdUser?.name)
                 localStorage.setItem('userEmail', data?.createdUser?.email)
                 setIsLoggedIn(true)
+                setWishlistedIds([])
             } catch (error) {
                 console.error(error);
             }
@@ -79,6 +84,8 @@ export const AuthenticationHandler = ({ children }) => {
             logOut,
             signUp,
             login,
+            wishlistedIds,
+            setWishlistedIds
         }}>
             {children}
         </AuthContext.Provider>

@@ -1,11 +1,12 @@
-import { createContext, useState } from "react";
+import { createContext, useContext } from "react";
+import { AuthContext } from "./authContext";
 
 export const WishListContext = createContext();
 
 export const WishListHandler = ({ children }) => {
     const encodedToken = localStorage?.getItem('encodedToken');
 
-    const [wishlistedIds, setWishlistedIds] = useState([])
+    const {wishlistedIds, setWishlistedIds} = useContext(AuthContext)
 
     const addToWishList = async (product) => {
         try {
@@ -40,6 +41,7 @@ export const WishListHandler = ({ children }) => {
         <WishListContext.Provider value={{
             addToWishList,
             removeFromWishlist,
+            setWishlistedIds
         }}>
             {children}
         </WishListContext.Provider>
