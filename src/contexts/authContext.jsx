@@ -6,7 +6,8 @@ export const AuthenticationHandler = ({ children }) => {
 
     const [isLoggedIn, setIsLoggedIn] = useState(localStorage?.getItem('encodedToken')?.length > 0)
     const [wishlistedIds, setWishlistedIds] = useState([])
-    
+    const [cartItemsIds, setCartItemsIds] = useState([])
+
     const testLogin = async () => {
         try {
             const testCreds = {
@@ -24,7 +25,8 @@ export const AuthenticationHandler = ({ children }) => {
             localStorage.setItem('userName', `${data?.foundUser?.firstName} ${data?.foundUser?.lastName}`)
             localStorage.setItem('userEmail', data?.foundUser?.email)
             setIsLoggedIn(true)
-            data?.foundUser?.wishlist?.length > 0 ? setWishlistedIds(data?.foundUser?.wishlist?.map(({_id}) => _id )) : setWishlistedIds([])
+            data?.foundUser?.wishlist?.length > 0 ? setWishlistedIds(data?.foundUser?.wishlist?.map(({ _id }) => _id)) : setWishlistedIds([])
+            data?.foundUser?.cart?.length > 0 ? setCartItemsIds(data?.foundUser?.cart?.map(({ _id }) => _id)) : setCartItemsIds([])
         } catch (error) {
             console.error(error);
         }
@@ -43,7 +45,8 @@ export const AuthenticationHandler = ({ children }) => {
                 localStorage.setItem('userName', data?.foundUser?.name)
                 localStorage.setItem('userEmail', data?.foundUser?.email)
                 setIsLoggedIn(true)
-                data?.foundUser?.wishlist?.length > 0 ? setWishlistedIds(data?.foundUser?.wishlist?.map(({_id}) => _id )) : setWishlistedIds([])
+                data?.foundUser?.wishlist?.length > 0 ? setWishlistedIds(data?.foundUser?.wishlist?.map(({ _id }) => _id)) : setWishlistedIds([])
+                data?.foundUser?.cart?.length > 0 ? setCartItemsIds(data?.foundUser?.cart?.map(({ _id }) => _id)) : setCartItemsIds([])
             } else {
                 console.log(data?.errors);
             }
@@ -71,6 +74,7 @@ export const AuthenticationHandler = ({ children }) => {
                 localStorage.setItem('userEmail', data?.createdUser?.email)
                 setIsLoggedIn(true)
                 setWishlistedIds([])
+                setCartItemsIds([])
             } catch (error) {
                 console.error(error);
             }
@@ -85,7 +89,9 @@ export const AuthenticationHandler = ({ children }) => {
             signUp,
             login,
             wishlistedIds,
-            setWishlistedIds
+            setWishlistedIds,
+            cartItemsIds, 
+            setCartItemsIds
         }}>
             {children}
         </AuthContext.Provider>

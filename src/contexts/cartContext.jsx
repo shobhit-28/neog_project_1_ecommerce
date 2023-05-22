@@ -1,23 +1,23 @@
-import { createContext, useState } from "react";
+import { createContext, useContext } from "react";
+import { AuthContext } from "./authContext";
 
 export const CartContext = createContext();
 
 export const CartHandler = ({children}) => {
     const encodedToken = localStorage?.getItem('encodedToken');
 
-    const [cartItemsIds, setCartItemsIds] = useState([])
+    const {cartItemsIds, setCartItemsIds} = useContext(AuthContext)
 
     const addToCart = async (product) => {
         try {
             if (cartItemsIds.includes(product?.id)) {
                 alert('already exists')
             } else {
-                await fetch('/api/user/wishlist', {
+                await fetch('/api/user/cart', {
                     method: 'POST',
                     headers: { authorization: encodedToken },
                     body: JSON.stringify({ product })
                 });
-                // setWishListData((await response.json())?.wishlist)
                 setCartItemsIds([...cartItemsIds, product?.id])
             }
         } catch (error) {
@@ -25,12 +25,24 @@ export const CartHandler = ({children}) => {
         }
     }
 
+    const removeFromCart = async (productId) => {
+        try {
+            await fetch(`/api/user/cart/${productId}`, {
+                method: 'DELETE',
+                headers: { authorization: encodedToken }
+            });
+            setCartItemsIds(cartItemsIds?.filter((id) => id !== productId ))
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
     return (
         <CartContext.Provider value={{
-            addToCart
+            addToCart,
+            removeFromCart
         }}>
             {children}
         </CartContext.Provider>
     )
-
 }

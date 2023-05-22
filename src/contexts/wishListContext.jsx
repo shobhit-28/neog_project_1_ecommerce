@@ -41,7 +41,6 @@ export const WishListHandler = ({ children }) => {
         <WishListContext.Provider value={{
             addToWishList,
             removeFromWishlist,
-            setWishlistedIds
         }}>
             {children}
         </WishListContext.Provider>
