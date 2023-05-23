@@ -49,11 +49,26 @@ export const CartHandler = ({children}) => {
         }
     }
 
+    const clearCart = async () => {
+        try {
+            for (const id of cartItemsIds) {
+                await fetch(`/api/user/cart/${id}`, {
+                    method: 'DELETE',
+                    headers: { authorization: encodedToken }
+                }); 
+            }
+            setCartItemsIds([])
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     return (
         <CartContext.Provider value={{
             addToCart,
             removeFromCart,
-            incDecCart
+            incDecCart,
+            clearCart
         }}>
             {children}
         </CartContext.Provider>

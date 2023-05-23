@@ -17,8 +17,8 @@
 
 /* edit-input */
 
-.profile-page .modal .address-section .edit-address input::-webkit-inner-spin-button,
-.profile-page .modal .address-section .edit-address input::-webkit-outer-spin-button {
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
     margin: 0;
     -webkit-appearance: none;
 }
