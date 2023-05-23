@@ -15,7 +15,6 @@ export const CategoryPage = () => {
     const category = responseData?.productCategories?.categories?.find((category) => category?.categoryName === categoryName);
     const products = responseData?.productData?.products?.filter(({ category }) => category === categoryName)
     const otherCategories = responseData?.productCategories?.categories?.filter((category) => category?.categoryName !== categoryName);
-    console.log(otherCategories)
 
     const checkBoxArr = [...new Set(products?.map(({ brand }) => brand))]
     const maxPrice = products?.reduce((acc, curr) => acc > curr?.price ? acc : curr?.price, 0);
@@ -125,10 +124,18 @@ export const CategoryPage = () => {
 
                 </div>
                 <div className='products'>
-                    
+
                     <div className="other-categories">
                         <p className="heading">Other Categories</p>
-                        
+                        <div className="contents">
+                            {otherCategories.map((category) => (
+                                <div className="other-category" key={category?._id}>
+                                    <div className="category-img-container">
+                                        <img src={category?.image} alt="" />
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                     </div>
 
                     <div className="product-div">
@@ -141,12 +148,12 @@ export const CategoryPage = () => {
                                     </div>
 
                                     : filteredData?.map((product) => (
-                                        <Products product={product} key={product?.id} />
+                                        <Products product={product} key={product?._id} />
                                     ))
 
                                 :
                                 products?.map((product) => (
-                                    <Products product={product} key={product?.id} />
+                                    <Products product={product} key={product?._id} />
                                 ))
                         }
                     </div>

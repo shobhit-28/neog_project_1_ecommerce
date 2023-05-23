@@ -24,7 +24,21 @@
     display: flex;
 }
 
+/* other-categories */
 
+.other-categories .contents {
+    display: flex;
+}
+
+.other-categories .other-category .category-img-container {
+    width: 10rem;
+    height: 6rem;
+    overflow: hidden;
+}
+
+.other-categories .other-category .category-img-container img {
+    width: 100%;
+}
 
 /* Filters section */
 
