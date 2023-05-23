@@ -14,6 +14,9 @@ export const CategoryPage = () => {
 
     const category = responseData?.productCategories?.categories?.find((category) => category?.categoryName === categoryName);
     const products = responseData?.productData?.products?.filter(({ category }) => category === categoryName)
+    const otherCategories = responseData?.productCategories?.categories?.filter((category) => category?.categoryName !== categoryName);
+    console.log(otherCategories)
+
     const checkBoxArr = [...new Set(products?.map(({ brand }) => brand))]
     const maxPrice = products?.reduce((acc, curr) => acc > curr?.price ? acc : curr?.price, 0);
 
@@ -122,23 +125,31 @@ export const CategoryPage = () => {
 
                 </div>
                 <div className='products'>
-                    {
-                        priceFilteredData ?
+                    
+                    <div className="other-categories">
+                        <p className="heading">Other Categories</p>
+                        
+                    </div>
 
-                            filteredData.length === 0 ?
-                                <div className="not-available">
-                                    <p>Sorry, but there are no products that match both the selected price range and brands. Please try adjusting your filters or selecting different options to find products that meet your criteria.</p>
-                                </div>
+                    <div className="product-div">
+                        {
+                            priceFilteredData ?
 
-                                : filteredData?.map((product) => (
-                                    <Products product={product} key={product?.id}/>
+                                filteredData.length === 0 ?
+                                    <div className="not-available">
+                                        <p>Sorry, but there are no products that match both the selected price range and brands. Please try adjusting your filters or selecting different options to find products that meet your criteria.</p>
+                                    </div>
+
+                                    : filteredData?.map((product) => (
+                                        <Products product={product} key={product?.id} />
+                                    ))
+
+                                :
+                                products?.map((product) => (
+                                    <Products product={product} key={product?.id} />
                                 ))
-
-                            :
-                            products?.map((product) => (
-                                <Products product={product} key={product?.id}/>
-                            ))
-                    }
+                        }
+                    </div>
                 </div>
             </div>
         </div>

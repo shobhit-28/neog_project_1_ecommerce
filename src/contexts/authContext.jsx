@@ -48,7 +48,7 @@ export const AuthenticationHandler = ({ children }) => {
                 data?.foundUser?.wishlist?.length > 0 ? setWishlistedIds(data?.foundUser?.wishlist?.map(({ _id }) => _id)) : setWishlistedIds([])
                 data?.foundUser?.cart?.length > 0 ? setCartItemsIds(data?.foundUser?.cart?.map(({ _id }) => _id)) : setCartItemsIds([])
             } else {
-                console.log(data?.errors);
+                alert(`Error ${response?.status}: ${data?.errors[0]}`);
             }
         } catch (error) {
             console.error(error);
@@ -67,14 +67,18 @@ export const AuthenticationHandler = ({ children }) => {
                     method: 'POST',
                     body: JSON.stringify(signupInputData)
                 });
-
                 const data = await response.json();
-                localStorage.setItem('encodedToken', data?.encodedToken);
-                localStorage.setItem('userName', data?.createdUser?.name)
-                localStorage.setItem('userEmail', data?.createdUser?.email)
-                setIsLoggedIn(true)
-                setWishlistedIds([])
-                setCartItemsIds([])
+                if (data?.encodedToken) {
+                    localStorage.setItem('encodedToken', data?.encodedToken);
+                    localStorage.setItem('userName', data?.createdUser?.name)
+                    localStorage.setItem('userEmail', data?.createdUser?.email)
+                    setIsLoggedIn(true)
+                    setWishlistedIds([])
+                    setCartItemsIds([])
+                } else {
+                    alert(`Error ${response?.status}: ${data?.errors[0]}`);
+                }
+
             } catch (error) {
                 console.error(error);
             }
@@ -90,7 +94,7 @@ export const AuthenticationHandler = ({ children }) => {
             login,
             wishlistedIds,
             setWishlistedIds,
-            cartItemsIds, 
+            cartItemsIds,
             setCartItemsIds
         }}>
             {children}
