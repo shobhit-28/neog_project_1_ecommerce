@@ -13,3 +13,16 @@
         margin-top: 6.5rem;
     }
 }
+
+
+/* edit-input */
+
+.profile-page .modal .address-section .edit-address input::-webkit-inner-spin-button,
+.profile-page .modal .address-section .edit-address input::-webkit-outer-spin-button {
+    margin: 0;
+    -webkit-appearance: none;
+}
+
+.profile-page .modal .address-section .edit-address input {
+    display: block;
+}

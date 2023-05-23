@@ -36,7 +36,7 @@ export const CartPage = () => {
             <p className="heading">Cart</p>
             <div className="cart-products">
                 {cartData?.map((product) => (
-                    <div className="cart-product">
+                    <div className="cart-product" key={product?._id}>
                         <p className="product-name">{product?.title}</p>
                         <button className="remove-from-cart" onClick={() => removeFromCartClickHandler(product?._id)}>Remove from cart</button>
                     </div>

@@ -36,7 +36,7 @@ export const WishListPage = () => {
             <p className="heading">Wishlist</p>
             <div className="wishlist-products">
                 {wishlistData?.map((product) => (
-                    <div className="wishlist-product">
+                    <div className="wishlist-product" key={product?._id} >
                         <p className="product-name">{product?.title}</p>
                         <button className="remove-from-wishlist" onClick={() => removeFromWishlistClickHandler(product?._id)}>Remove from wishlist</button>
                     </div>
