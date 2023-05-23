@@ -16,6 +16,7 @@ import { ProfilePage } from "./pages/profilePage/profilePage";
 import { RequiresAuth } from "./requiresAuth/requiresAuth";
 import { WishListPage } from "./pages/wishListPage/wishListPage";
 import { CartPage } from "./pages/cartPage/cartPage";
+import { CheckoutPage } from "./pages/checkoutPage/checkoutPage";
 
 function App() {
 
@@ -41,6 +42,7 @@ function App() {
         <Route path="/profile" element={isLoggedIn ? <ProfilePage /> : <Navigate to='/login' />} />
         <Route path="/wishlist" element={<RequiresAuth><WishListPage /></RequiresAuth>} />
         <Route path="/cart" element={<RequiresAuth><CartPage /></RequiresAuth>} />
+        <Route path="/checkout" element={<RequiresAuth><CheckoutPage /></RequiresAuth>} />
       </Routes>
       <Footer />
     </div>
