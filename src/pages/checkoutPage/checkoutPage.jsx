@@ -35,9 +35,9 @@ export const CheckoutPage = () => {
 
     const orderHandler = () => {
         setIsModalOpen(true)
-        setCartData([])
         clearCart()
         setTimeout(() => {
+            setCartData([])
             navigate("/");
         }, 6000);
     }
@@ -64,10 +64,11 @@ export const CheckoutPage = () => {
 
     return (
         <div className="checkout-page">
-            {isModalOpen &&
+            {isModalOpen ?
                 <div className="checkout-modal">
                     <p className="heading">Order Confirmed</p>
                     <div className="details">
+                        <p className="total-price">Total Price: {totalPrice}</p>
                         <p className="eta">Expected Delivery: {expectedDate}</p>
                         <p className="declaration">Order will be delivered to: </p>
                         <p className="recipient-name">{selectedAddress?.name}</p>
@@ -75,8 +76,8 @@ export const CheckoutPage = () => {
                         <p className="recipient-number">Phone Number: {selectedAddress?.phone}</p>
                     </div>
                 </div>
-            }
-            {!cartData
+            :
+            !cartData
                 ?
                 <div className="loading">
                     <h1 className="loading">
