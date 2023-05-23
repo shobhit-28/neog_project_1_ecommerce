@@ -37,10 +37,23 @@ export const CartHandler = ({children}) => {
         }
     }
 
+    const incDecCart = async (productId, type) => {
+        try {
+            await fetch(`/api/user/cart/${productId}`, {
+                method: 'POST',
+                headers: { authorization: encodedToken },
+                body: JSON.stringify({action: { type }})
+            })
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     return (
         <CartContext.Provider value={{
             addToCart,
-            removeFromCart
+            removeFromCart,
+            incDecCart
         }}>
             {children}
         </CartContext.Provider>
