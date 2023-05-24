@@ -40,6 +40,7 @@
 }
 .search-page .data-found .searched-products {
     display: flex;
+    justify-content: space-between;
     flex-wrap: wrap;
 }
 
@@ -57,4 +58,5 @@
 .search-page .data-found .search-suggestions {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
