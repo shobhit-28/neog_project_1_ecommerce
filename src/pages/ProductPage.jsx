@@ -6,7 +6,7 @@ import { ProductReducerContext } from "../contexts/productReducerContext/product
 export const ProductPage = () => {
     const {productID} = useParams();
     const {responseData} = useContext(DataContext);
-    const product = responseData?.productData?.products?.find(({id}) => id === productID );
+    const product = responseData?.productData?.products?.find(({_id}) => _id === productID );
     const {setIsSearchModalOpen} = useContext(ProductReducerContext);
 
     useEffect(() => {

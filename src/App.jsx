@@ -7,7 +7,6 @@ import Mockman from "mockman-js";
 import { HomePage } from "./pages/HomePage/HomePage";
 import { Header } from "./components/header/header";
 import { ProductPage } from "./pages/ProductPage";
-import { Footer } from "./components/footer/footer";
 import { SearchPage } from "./pages/searchPage/searchPage";
 import { CategoryPage } from "./pages/categoryPage/categoryPage";
 import { Login } from "./pages/login/login";
@@ -46,7 +45,6 @@ function App() {
         <Route path="/checkout" element={<RequiresAuth><CheckoutPage /></RequiresAuth>} />
         <Route path="/products" element= {<AllProductsPage />} />
       </Routes>
-      <Footer />
     </div>
   );
 }

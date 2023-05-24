@@ -1,11 +1,19 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { DataContext } from "../../contexts/dataContext"
 import './HomePage.css'
 import { useNavigate } from "react-router"
+import { Footer } from "../../components/footer/footer"
+import { ProductReducerContext } from "../../contexts/productReducerContext/productReducerContext"
 
 export const HomePage = () => {
     const { responseData } = useContext(DataContext);
+    const { setIsSearchModalOpen } = useContext(ProductReducerContext);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        setIsSearchModalOpen(false)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
     
     return (
         <div className="landing-page">
@@ -28,6 +36,7 @@ export const HomePage = () => {
                     </div>
                 ))}
             </div>
+            <Footer />
         </div>
     )
 }
