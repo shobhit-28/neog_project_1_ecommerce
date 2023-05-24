@@ -48,8 +48,8 @@ export const CategoryPage = () => {
 
     const filteredData = priceFilteredData?.filter(({ brand }) => (
         !checkedArr?.every(checkbox => (brand !== checkbox))
-        ))
-    console.log('checkd', checkedArr)
+    ))
+
     const sortLoToHi = (event) => {
         if (event.target.checked) {
             filteredData ?

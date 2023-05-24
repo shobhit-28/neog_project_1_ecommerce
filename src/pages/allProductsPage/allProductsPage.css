@@ -28,22 +28,22 @@
 
 /* Filters section */
 
-.filters label {
+.products-page .filters label {
     display: block;
 }
 
-.filters {
+.products-page .filters {
     width: 15rem;
-    border-right: 1px solid;
+    /* border-right: 1px solid; */
     padding: 0 1rem;
 }
 
-.filters p {
+.products-page .filters p {
     font-size: 1.05rem;
     font-weight: 500;
 }
 
-.filters div:not(.prices){
+.products-page .filters div:not(.prices){
     width: 100%;
     margin: 1rem 0;
 }
@@ -54,12 +54,11 @@
     margin-bottom: 1rem;
 }
 
-.filters .prices {
+.products-page .filters .prices {
     display: flex;
     justify-content: space-between;
 }
 
-.filters .price-slider input {
+.products-page .filters .price-slider input {
     width: 100%;
-    cursor: e-resize;
 }
