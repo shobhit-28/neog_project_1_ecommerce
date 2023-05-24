@@ -6,7 +6,6 @@ import Mockman from "mockman-js";
 
 import { HomePage } from "./pages/HomePage/HomePage";
 import { Header } from "./components/header/header";
-import { ProductPage } from "./pages/ProductPage";
 import { SearchPage } from "./pages/searchPage/searchPage";
 import { CategoryPage } from "./pages/categoryPage/categoryPage";
 import { Login } from "./pages/login/login";
@@ -17,6 +16,7 @@ import { WishListPage } from "./pages/wishListPage/wishListPage";
 import { CartPage } from "./pages/cartPage/cartPage";
 import { CheckoutPage } from "./pages/checkoutPage/checkoutPage";
 import { AllProductsPage } from "./pages/allProductsPage/allProductsPage";
+import { ProductPage } from "./pages/ProductPage";
 
 function App() {
 

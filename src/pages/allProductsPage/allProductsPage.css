@@ -1,104 +1,3 @@
-/* @media only screen and (max-width: 715px) {
-    .products-page .category-front {
-        width: 100% !important;
-    }
-
-    .products-page .contents {
-        flex-direction: column;
-    }
-
-    .category-page .category-title {
-        font-size: 1.25rem !important;
-    }
-
-    .category-page .category-filters .toggle-responsive-filters {
-        visibility: visible !important;
-        margin: 0.5rem 1rem !important;
-    }
-
-    .category-page .filters:last-of-type {
-        display: block !important;
-    }
-
-    .category-page .filters:first-of-type {
-        display: none;
-    }
-
-    .category-page .divide-filters {
-        display: block !important;
-    }
-
-    .category-page .other-categories {
-        display: none;
-    }
-
-}
-
-.products-page {
-    display: grid;
-}
-
-.products-front {
-    background: url(/src/resources/images/landing_page_image.jpg);
-    width: 100%;
-    height: 30vh;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: rgba(255, 255, 255, 1);
-}
-
-.products-title {
-    font-size: 2rem;
-    text-transform: uppercase;
-    font-weight: 600;
-}
-
-.contents {
-    display: flex;
-} */
-
-
-/* Filters section */
-
-/* .products-page .filters label {
-    display: block;
-}
-
-.products-page .filters {
-    width: 15rem;
-    padding: 0 1rem;
-}
-
-.products-page .filters p {
-    font-size: 1.05rem;
-    font-weight: 500;
-}
-
-.products-page .filters div:not(.prices){
-    width: 100%;
-    margin: 1rem 0;
-}
-
-.filters .filter-head {
-    font-weight: 600;
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-}
-
-.products-page .filters .prices {
-    display: flex;
-    justify-content: space-between;
-}
-
-.products-page .filters .price-slider input {
-    width: 100%;
-} */
-
-
 @media only screen and (max-width: 715px) {
     .products-page .products-front {
         width: 100% !important;
@@ -114,7 +13,7 @@
 
     .products-page .toggle-responsive-filters {
         visibility: visible !important;
-        margin: 0.5rem 1rem !important;
+        margin: 0.5rem 2rem !important;
     }
 
     .products-page .filters:last-of-type {

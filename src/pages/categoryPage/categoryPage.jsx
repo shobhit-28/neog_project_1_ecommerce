@@ -13,7 +13,7 @@ export const CategoryPage = () => {
 
     const [isResponsiveFiltersOpen, setIsResponsiveFiltersOpen] = useState(false);
 
-    const { setIsSearchModalOpen } = useContext(ProductReducerContext);
+    const { setIsSearchModalOpen, setMenuState } = useContext(ProductReducerContext);
     const { responseData } = useContext(DataContext);
 
     const category = responseData?.productCategories?.categories?.find((category) => category?.categoryName === categoryName);
@@ -96,6 +96,7 @@ export const CategoryPage = () => {
 
     useEffect(() => {
         setIsSearchModalOpen(false)
+        setMenuState(false)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return (

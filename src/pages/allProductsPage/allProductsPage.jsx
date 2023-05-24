@@ -8,7 +8,7 @@ import { Loader } from '../../components/loader/loader';
 export const AllProductsPage = () => {
     const [isResponsiveFiltersOpen, setIsResponsiveFiltersOpen] = useState(false);
 
-    const { setIsSearchModalOpen } = useContext(ProductReducerContext);
+    const { setIsSearchModalOpen, setMenuState } = useContext(ProductReducerContext);
     const { responseData } = useContext(DataContext);
 
     const products = responseData?.productData?.products
@@ -82,6 +82,7 @@ export const AllProductsPage = () => {
 
     useEffect(() => {
         setIsSearchModalOpen(false)
+        setMenuState(false)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return (

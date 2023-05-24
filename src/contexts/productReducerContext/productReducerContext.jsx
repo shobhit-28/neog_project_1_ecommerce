@@ -12,6 +12,7 @@ export const ProductReducerHandler = ({ children }) => {
 
     const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
     const [searchBarData, setSearchBarData] = useState('')
+    const [menuState, setMenuState] = useState(false);
 
     const initialState = {
         searchData: [],
@@ -76,7 +77,9 @@ export const ProductReducerHandler = ({ children }) => {
             addressData: state.addresses,
             addAddress,
             editAddress,
-            removeAddress
+            removeAddress,
+            menuState,
+            setMenuState
         }}>
             {children}
         </ProductReducerContext.Provider>

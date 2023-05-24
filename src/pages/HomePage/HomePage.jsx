@@ -8,11 +8,16 @@ import { Loader } from "../../components/loader/loader"
 
 export const HomePage = () => {
     const { responseData } = useContext(DataContext);
-    const { setIsSearchModalOpen } = useContext(ProductReducerContext);
+    const { setIsSearchModalOpen, setMenuState } = useContext(ProductReducerContext);
     const navigate = useNavigate();
 
     useEffect(() => {
         setIsSearchModalOpen(false)
+        setMenuState(false)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+    useEffect(() => {
+        setMenuState(false)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
