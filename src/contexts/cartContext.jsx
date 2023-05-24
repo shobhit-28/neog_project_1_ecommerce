@@ -23,6 +23,7 @@ export const CartHandler = ({ children }) => {
                         body: JSON.stringify({ product })
                     });
                     setCartItemsIds([...cartItemsIds, product?.id])
+                    alert('Item added to cart')
                 }
             } catch (error) {
                 console.error(error);
@@ -39,6 +40,7 @@ export const CartHandler = ({ children }) => {
                 headers: { authorization: encodedToken }
             });
             setCartItemsIds(cartItemsIds?.filter((id) => id !== productId))
+            alert('Item removed from cart')
         } catch (error) {
             console.error(error)
         }

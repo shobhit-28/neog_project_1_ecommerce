@@ -23,6 +23,7 @@ export const WishListHandler = ({ children }) => {
                     body: JSON.stringify({ product })
                 });
                 setWishlistedIds([...wishlistedIds, product?.id])
+                alert('Item added to wishlist')
             }
         } catch (error) {
             console.error(error);
@@ -38,6 +39,7 @@ export const WishListHandler = ({ children }) => {
                 headers: { authorization: encodedToken }
             });
             setWishlistedIds(wishlistedIds?.filter((id) => id !== productId ))
+            alert('Item removed from wishlist')
         } catch (error) {
             console.error(error)
         }
