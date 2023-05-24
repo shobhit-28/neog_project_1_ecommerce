@@ -44,7 +44,7 @@ export const Header = () => {
             </div>
             {searchData.length > 0 && isSearchModalOpen && <div className="search-results">
                 {searchData.map((product) => (
-                    <div className="search-result" key={product?.id} onClick={() => navigate(`product/${product?.id}`)} >
+                    <div className="search-result" key={product?.id} onClick={() => navigate(`/product/${product?.id}`)} >
                         <div className="img-container">
                             <img src={product?.thumbnail} alt={product?.title} />
                         </div>

@@ -53,17 +53,18 @@ export const CategoryPage = () => {
     const sortLoToHi = (event) => {
         if (event.target.checked) {
             filteredData ?
-                setPriceFilteredData(filteredData?.sort((a, b) => a.price - b.price))
+                setPriceFilteredData(filteredData?.sort((a, b) => (a?.price - (a?.price * (a.discountPercentage / 100))) - (b?.price - (b?.price * (b?.discountPercentage / 100)))))
                 :
-                setPriceFilteredData(products?.sort((a, b) => a.price - b.price));
+                setPriceFilteredData(products?.sort((a, b) => (a?.price - (a?.price * (a.discountPercentage / 100))) - (b?.price - (b?.price * (b?.discountPercentage / 100)))));
         }
     }
+    
     const sortHiToLo = (event) => {
         if (event.target.checked) {
             filteredData ?
-                setPriceFilteredData(filteredData?.sort((a, b) => b.price - a.price))
+                setPriceFilteredData(filteredData?.sort((a, b) => (b?.price - (b?.price * (b?.discountPercentage / 100))) - (a?.price - (a?.price * (a.discountPercentage / 100)))))
                 :
-                setPriceFilteredData(products?.sort((a, b) => b.price - a.price));
+                setPriceFilteredData(products?.sort((a, b) => (b?.price - (b?.price * (b?.discountPercentage / 100))) - (a?.price - (a?.price * (a?.discountPercentage / 100)))));
         }
     }
     const ratingHandlerLoToHi = (event) => {
