@@ -1,15 +1,19 @@
 import { createContext, useContext } from "react";
 import { AuthContext } from "./authContext";
+import { useNavigate } from "react-router";
 
 export const WishListContext = createContext();
 
 export const WishListHandler = ({ children }) => {
     const encodedToken = localStorage?.getItem('encodedToken');
 
-    const {wishlistedIds, setWishlistedIds} = useContext(AuthContext)
+    const {wishlistedIds, setWishlistedIds, isLoggedIn} = useContext(AuthContext)
+
+    const navigate = useNavigate()
 
     const addToWishList = async (product) => {
-        try {
+        if (isLoggedIn) 
+        {try {
             if (wishlistedIds.includes(product?.id)) {
                 alert('already exists')
             } else {
@@ -22,6 +26,8 @@ export const WishListHandler = ({ children }) => {
             }
         } catch (error) {
             console.error(error);
+        }} else {
+            navigate('/login')
         }
     }
 

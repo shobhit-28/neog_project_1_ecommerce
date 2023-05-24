@@ -57,7 +57,9 @@ export const AuthenticationHandler = ({ children }) => {
 
     const logOut = () => {
         localStorage.clear();
-        setIsLoggedIn(false)
+        setIsLoggedIn(false);
+        setWishlistedIds([])
+        setCartItemsIds([])
     }
 
     const signUp = async (signupInputData, isValid) => {

@@ -1,13 +1,16 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import './categoryPage.css'
 import { useContext, useEffect, useState } from 'react';
 import { ProductReducerContext } from '../../contexts/productReducerContext/productReducerContext';
 import { DataContext } from '../../contexts/dataContext';
 import { Products } from '../../components/products/products';
+import { Loader } from '../../components/loader/loader';
 // import { Filters } from '../../components/filters/filters';
 
 export const CategoryPage = () => {
     const { categoryName } = useParams();
+
+    const navigate = useNavigate();
 
     const { setIsSearchModalOpen } = useContext(ProductReducerContext);
     const { responseData } = useContext(DataContext);
@@ -42,9 +45,11 @@ export const CategoryPage = () => {
 
         }
     }
+
     const filteredData = priceFilteredData?.filter(({ brand }) => (
         !checkedArr?.every(checkbox => (brand !== checkbox))
-    ))
+        ))
+    console.log('checkd', checkedArr)
     const sortLoToHi = (event) => {
         if (event.target.checked) {
             filteredData ?
@@ -78,87 +83,100 @@ export const CategoryPage = () => {
         }
     }
 
+    const otherCategoryClickHandler = (categoryName) => {
+        setTimeout(() => {
+            navigate(`/`)
+        }, 0);
+        setTimeout(() => {
+            navigate(`/category/${categoryName}`)
+        }, 1);
+    }
+
     useEffect(() => {
         setIsSearchModalOpen(false)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return (
-        <div className="category-page">
-            <div className="category-front" style={{ backgroundImage: `url(${category?.image})` }}>
-                <p className="category-title">
-                    {category?.categoryName}
-                </p>
-            </div>
-            <div className="contents">
-                <div className="category-filters">
-                    <div className="filters">
-                        <p className="filter-head">Filters</p>
-                        {maxPrice && <label className='price-slider'>
-                            <p>Price</p>
-                            <div className="prices">
-                                <p>0</p>
-                                <p>₹ {Math.round(maxPrice / 2)}</p>
-                                <p>₹ {Math.round(maxPrice)}</p>
-                            </div>
-                            <input type="range" className="price-slider" min='0' max={maxPrice + 1} defaultValue={maxPrice + 1} onChange={priceChangeHandler} />
-                        </label>}
-                        <div className="brand-section">
-                            <p>Brands</p>
-                            {checkBoxArr?.map((brand, index) => (
-                                <label className="brand-selector" key={index} onChange={checkBoxHandler}>
-                                    <input type="checkbox" name={brand} value={brand} defaultChecked /> {brand}
-                                </label>
-                            ))}
-                        </div>
-                        <div className="sort-by-price">
-                            <p>Sort By Price</p>
-                            <label onChange={sortHiToLo}><input type="radio" name="price" id="" />Sort high To Low</label>
-                            <label onChange={sortLoToHi}><input type="radio" name="price" id="" />Sort Low to High</label>
-                        </div>
-                        <div className="sort-by-rating">
-                            <p>Sort By Rating</p>
-                            <label onChange={ratingHandlerHiToLo}><input type="radio" name="rating" id="" />Sort high To Low</label>
-                            <label onChange={ratingHandlerLoToHi}><input type="radio" name="rating" id="" />Sort Low to High</label>
-                        </div>
-                    </div>
-
+        !responseData?.productCategories?.categories
+            ?
+            <Loader />
+            :
+            <div className="category-page">
+                <div className="category-front" style={{ backgroundImage: `url(${category?.image})` }}>
+                    <p className="category-title">
+                        {category?.categoryName}
+                    </p>
                 </div>
-                <div className='products'>
-
-                    <div className="other-categories">
-                        <p className="heading">Other Categories</p>
-                        <div className="contents">
-                            {otherCategories?.map((category) => (
-                                <div className="other-category" key={category?._id}>
-                                    <div className="category-img-container">
-                                        <img src={category?.image} alt="" />
-                                    </div>
+                <div className="contents">
+                    <div className="category-filters">
+                        <div className="filters">
+                            <p className="filter-head">Filters</p>
+                            {maxPrice && <label className='price-slider'>
+                                <p>Price</p>
+                                <div className="prices">
+                                    <p>0</p>
+                                    <p>₹ {Math.round(maxPrice / 2)}</p>
+                                    <p>₹ {Math.round(maxPrice)}</p>
                                 </div>
-                            ))}
+                                <input type="range" className="price-slider" min='0' max={maxPrice + 1} defaultValue={maxPrice + 1} onChange={priceChangeHandler} />
+                            </label>}
+                            <div className="brand-section">
+                                <p>Brands</p>
+                                {checkBoxArr?.map((brand, index) => (
+                                    <label className="brand-selector" key={index} onChange={checkBoxHandler}>
+                                        <input type="checkbox" name={brand} value={brand} defaultChecked /> {brand}
+                                    </label>
+                                ))}
+                            </div>
+                            <div className="sort-by-price">
+                                <p>Sort By Price</p>
+                                <label onChange={sortHiToLo}><input type="radio" name="price" id="" />Sort high To Low</label>
+                                <label onChange={sortLoToHi}><input type="radio" name="price" id="" />Sort Low to High</label>
+                            </div>
+                            <div className="sort-by-rating">
+                                <p>Sort By Rating</p>
+                                <label onChange={ratingHandlerHiToLo}><input type="radio" name="rating" id="" />Sort high To Low</label>
+                                <label onChange={ratingHandlerLoToHi}><input type="radio" name="rating" id="" />Sort Low to High</label>
+                            </div>
                         </div>
+
                     </div>
+                    <div className='products'>
 
-                    <div className="product-div">
-                        {
-                            priceFilteredData ?
-
-                                filteredData.length === 0 ?
-                                    <div className="not-available">
-                                        <p>Sorry, but there are no products that match both the selected price range and brands. Please try adjusting your filters or selecting different options to find products that meet your criteria.</p>
+                        <div className="other-categories">
+                            <p className="heading">Other Categories</p>
+                            <div className="contents">
+                                {otherCategories?.map((category) => (
+                                    <div className="other-category" key={category?._id} onClick={() => otherCategoryClickHandler(category?.categoryName)}>
+                                        <div className="category-img-container">
+                                            <img src={category?.image} alt="" />
+                                        </div>
                                     </div>
+                                ))}
+                            </div>
+                        </div>
 
-                                    : filteredData?.map((product) => (
+                        <div className="product-div">
+                            {
+                                priceFilteredData ?
+
+                                    filteredData.length === 0 ?
+                                        <div className="not-available">
+                                            <p>Sorry, but there are no products that match both the selected price range and brands. Please try adjusting your filters or selecting different options to find products that meet your criteria.</p>
+                                        </div>
+
+                                        : filteredData?.map((product) => (
+                                            <Products product={product} key={product?._id} />
+                                        ))
+
+                                    :
+                                    products?.map((product) => (
                                         <Products product={product} key={product?._id} />
                                     ))
-
-                                :
-                                products?.map((product) => (
-                                    <Products product={product} key={product?._id} />
-                                ))
-                        }
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
     )
 }

@@ -1,27 +1,34 @@
 import { createContext, useContext } from "react";
 import { AuthContext } from "./authContext";
+import { useNavigate } from "react-router";
 
 export const CartContext = createContext();
 
-export const CartHandler = ({children}) => {
+export const CartHandler = ({ children }) => {
     const encodedToken = localStorage?.getItem('encodedToken');
 
-    const {cartItemsIds, setCartItemsIds} = useContext(AuthContext)
+    const { cartItemsIds, setCartItemsIds, isLoggedIn } = useContext(AuthContext)
+
+    const navigate = useNavigate()
 
     const addToCart = async (product) => {
-        try {
-            if (cartItemsIds.includes(product?.id)) {
-                alert('already exists')
-            } else {
-                await fetch('/api/user/cart', {
-                    method: 'POST',
-                    headers: { authorization: encodedToken },
-                    body: JSON.stringify({ product })
-                });
-                setCartItemsIds([...cartItemsIds, product?.id])
+        if (isLoggedIn) {
+            try {
+                if (cartItemsIds.includes(product?.id)) {
+                    alert('already exists')
+                } else {
+                    await fetch('/api/user/cart', {
+                        method: 'POST',
+                        headers: { authorization: encodedToken },
+                        body: JSON.stringify({ product })
+                    });
+                    setCartItemsIds([...cartItemsIds, product?.id])
+                }
+            } catch (error) {
+                console.error(error);
             }
-        } catch (error) {
-            console.error(error);
+        } else {
+            navigate('/login')
         }
     }
 
@@ -31,7 +38,7 @@ export const CartHandler = ({children}) => {
                 method: 'DELETE',
                 headers: { authorization: encodedToken }
             });
-            setCartItemsIds(cartItemsIds?.filter((id) => id !== productId ))
+            setCartItemsIds(cartItemsIds?.filter((id) => id !== productId))
         } catch (error) {
             console.error(error)
         }
@@ -42,7 +49,7 @@ export const CartHandler = ({children}) => {
             await fetch(`/api/user/cart/${productId}`, {
                 method: 'POST',
                 headers: { authorization: encodedToken },
-                body: JSON.stringify({action: { type }})
+                body: JSON.stringify({ action: { type } })
             })
         } catch (error) {
             console.error(error);
@@ -55,7 +62,7 @@ export const CartHandler = ({children}) => {
                 await fetch(`/api/user/cart/${id}`, {
                     method: 'DELETE',
                     headers: { authorization: encodedToken }
-                }); 
+                });
             }
             setCartItemsIds([])
         } catch (error) {
