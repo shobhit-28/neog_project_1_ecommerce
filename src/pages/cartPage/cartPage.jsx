@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import './cartPage.css'
 import { CartContext } from '../../contexts/cartContext';
 import { PriceCard } from '../../components/priceCard/priceCard';
+import { Loader } from '../../components/loader/loader';
 
 export const CartPage = () => {
     const encodedToken = localStorage?.getItem('encodedToken');
@@ -46,11 +47,7 @@ export const CartPage = () => {
         <div className="cart-page">
             {!cartData
                 ?
-                <div className="loading">
-                    <h1 className="loading">
-                        Loading
-                    </h1>
-                </div>
+                <Loader />
                 :
                 <>
                     <p className="heading">Cart</p>
