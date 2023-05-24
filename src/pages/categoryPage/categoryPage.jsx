@@ -12,6 +12,8 @@ export const CategoryPage = () => {
 
     const navigate = useNavigate();
 
+    const [isResponsiveFiltersOpen, setIsResponsiveFiltersOpen] = useState(false);
+
     const { setIsSearchModalOpen } = useContext(ProductReducerContext);
     const { responseData } = useContext(DataContext);
 
@@ -112,35 +114,80 @@ export const CategoryPage = () => {
                     <div className="category-filters">
                         <div className="filters">
                             <p className="filter-head">Filters</p>
-                            {maxPrice && <label className='price-slider'>
-                                <p>Price</p>
-                                <div className="prices">
-                                    <p>0</p>
-                                    <p>₹ {Math.round(maxPrice / 2)}</p>
-                                    <p>₹ {Math.round(maxPrice - 1)}</p>
+                            <div className="filters-div">
+                                <div className="price-slider-div">
+                                    {maxPrice &&
+                                        <label className='price-slider'>
+                                            <p>Price</p>
+                                            <div className="prices">
+                                                <p>0</p>
+                                                <p>₹ {Math.round(maxPrice / 2)}</p>
+                                                <p>₹ {Math.round(maxPrice - 1)}</p>
+                                            </div>
+                                            <input type="range" className="price-slider" min='0' max={maxPrice + 1} defaultValue={maxPrice + 1} onChange={priceChangeHandler} />
+                                        </label>}
                                 </div>
-                                <input type="range" className="price-slider" min='0' max={maxPrice + 1} defaultValue={maxPrice + 1} onChange={priceChangeHandler} />
-                            </label>}
-                            <div className="brand-section">
-                                <p>Brands</p>
-                                {checkBoxArr?.map((brand, index) => (
-                                    <label className="brand-selector" key={index} onChange={checkBoxHandler}>
-                                        <input type="checkbox" name={brand} value={brand} defaultChecked /> {brand}
-                                    </label>
-                                ))}
-                            </div>
-                            <div className="sort-by-price">
-                                <p>Sort By Price</p>
-                                <label onChange={sortHiToLo}><input type="radio" name="price" id="" />Sort high To Low</label>
-                                <label onChange={sortLoToHi}><input type="radio" name="price" id="" />Sort Low to High</label>
-                            </div>
-                            <div className="sort-by-rating">
-                                <p>Sort By Rating</p>
-                                <label onChange={ratingHandlerHiToLo}><input type="radio" name="rating" id="" />Sort high To Low</label>
-                                <label onChange={ratingHandlerLoToHi}><input type="radio" name="rating" id="" />Sort Low to High</label>
+                                <div className="brand-section">
+                                    <p>Brands</p>
+                                    {checkBoxArr?.map((brand, index) => (
+                                        <label className="brand-selector" key={index} onChange={checkBoxHandler}>
+                                            <input type="checkbox" name={brand} value={brand} defaultChecked /> {brand}
+                                        </label>
+                                    ))}
+                                </div>
+                                <div className="sort-by-price">
+                                    <p>Sort By Price</p>
+                                    <label onChange={sortHiToLo}><input type="radio" name="price" id="" />Sort high To Low</label>
+                                    <label onChange={sortLoToHi}><input type="radio" name="price" id="" />Sort Low to High</label>
+                                </div>
+                                <div className="sort-by-rating">
+                                    <p>Sort By Rating</p>
+                                    <label onChange={ratingHandlerHiToLo}><input type="radio" name="rating" id="" />Sort high To Low</label>
+                                    <label onChange={ratingHandlerLoToHi}><input type="radio" name="rating" id="" />Sort Low to High</label>
+                                </div>
                             </div>
                         </div>
 
+                        <p className="toggle-responsive-filters" onClick={() => setIsResponsiveFiltersOpen(!isResponsiveFiltersOpen)} >
+                            Filters
+                        </p>
+                        <div className="filters">
+                            {isResponsiveFiltersOpen && <>
+                                <div className="filters-div">
+                                    <div className="price-slider-div">
+                                        {maxPrice &&
+                                            <label className='price-slider'>
+                                                <p>Price</p>
+                                                <div className="prices">
+                                                    <p>0</p>
+                                                    <p>₹ {Math.round(maxPrice / 2)}</p>
+                                                    <p>₹ {Math.round(maxPrice - 1)}</p>
+                                                </div>
+                                                <input type="range" className="price-slider" min='0' max={maxPrice + 1} defaultValue={maxPrice + 1} onChange={priceChangeHandler} />
+                                            </label>}
+                                    </div>
+                                    <div className="brand-section">
+                                        <p>Brands</p>
+                                        {checkBoxArr?.map((brand, index) => (
+                                            <label className="brand-selector" key={index} onChange={checkBoxHandler}>
+                                                <input type="checkbox" name={brand} value={brand} defaultChecked /> {brand}
+                                            </label>
+                                        ))}
+                                    </div>
+                                    <div className="sort-by-price">
+                                        <p>Sort By Price</p>
+                                        <label onChange={sortHiToLo}><input type="radio" name="price" id="" />Sort high To Low</label>
+                                        <label onChange={sortLoToHi}><input type="radio" name="price" id="" />Sort Low to High</label>
+                                    </div>
+                                    <div className="sort-by-rating">
+                                        <p>Sort By Rating</p>
+                                        <label onChange={ratingHandlerHiToLo}><input type="radio" name="rating" id="" />Sort high To Low</label>
+                                        <label onChange={ratingHandlerLoToHi}><input type="radio" name="rating" id="" />Sort Low to High</label>
+                                    </div>
+                                </div>
+                            </>}
+                        </div>
+                        <hr className="divide-filters" />
                     </div>
                     <div className='products'>
 
