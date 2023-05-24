@@ -11,7 +11,7 @@
     }
 
     .header .nav-links {
-        display: none
+        display: none !important
     }
 
     .header .search {
@@ -91,6 +91,8 @@
 
 .header .nav-links {
     font-size: 1.1rem;
+    display: flex;
+    justify-content: center;
 }
 
 .header .nav-head {
