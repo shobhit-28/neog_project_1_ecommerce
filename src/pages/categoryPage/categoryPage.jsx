@@ -5,7 +5,6 @@ import { ProductReducerContext } from '../../contexts/productReducerContext/prod
 import { DataContext } from '../../contexts/dataContext';
 import { Products } from '../../components/products/products';
 import { Loader } from '../../components/loader/loader';
-// import { Filters } from '../../components/filters/filters';
 
 export const CategoryPage = () => {
     const { categoryName } = useParams();
