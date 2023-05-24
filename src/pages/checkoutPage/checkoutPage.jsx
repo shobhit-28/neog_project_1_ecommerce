@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import './checkout.css'
-import { useNavigate } from 'react-router';
+import { Navigate, useNavigate } from 'react-router';
 import { ProductReducerContext } from '../../contexts/productReducerContext/productReducerContext';
 import { CartContext } from '../../contexts/cartContext';
 
@@ -68,7 +68,7 @@ export const CheckoutPage = () => {
                 <div className="checkout-modal">
                     <p className="heading">Order Confirmed</p>
                     <div className="details">
-                        <p className="total-price">Total Price: {totalPrice}</p>
+                        <p className="total-price">Total Price: ₹ {totalPrice}</p>
                         <p className="eta">Expected Delivery: {expectedDate}</p>
                         <p className="declaration">Order will be delivered to: </p>
                         <p className="recipient-name">{selectedAddress?.name}</p>
@@ -87,7 +87,7 @@ export const CheckoutPage = () => {
                 :
                 <>
                     {cartData?.length > 0
-                        &&
+                        ?
                         <div className="checkout-parent">
                             <p className="heading">Checkout</p>
 
@@ -140,8 +140,8 @@ export const CheckoutPage = () => {
                             </div>
 
                         </div>
-                        // :
-                        // <Navigate to='/' />
+                        :
+                        <Navigate to='/' />
                     }
                 </>}
         </div>

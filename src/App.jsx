@@ -17,6 +17,7 @@ import { RequiresAuth } from "./requiresAuth/requiresAuth";
 import { WishListPage } from "./pages/wishListPage/wishListPage";
 import { CartPage } from "./pages/cartPage/cartPage";
 import { CheckoutPage } from "./pages/checkoutPage/checkoutPage";
+import { AllProductsPage } from "./pages/allProductsPage/allProductsPage";
 
 function App() {
 
@@ -43,6 +44,7 @@ function App() {
         <Route path="/wishlist" element={<RequiresAuth><WishListPage /></RequiresAuth>} />
         <Route path="/cart" element={<RequiresAuth><CartPage /></RequiresAuth>} />
         <Route path="/checkout" element={<RequiresAuth><CheckoutPage /></RequiresAuth>} />
+        <Route path="/products" element= {<AllProductsPage />} />
       </Routes>
       <Footer />
     </div>
