@@ -1,4 +1,3 @@
-import { useParams } from 'react-router-dom';
 import './allProductsPage.css'
 import { useContext, useEffect, useState } from 'react';
 import { ProductReducerContext } from '../../contexts/productReducerContext/productReducerContext';
@@ -7,19 +6,19 @@ import { Products } from '../../components/products/products';
 // import { Filters } from '../../components/filters/filters';
 
 export const AllProductsPage = () => {
-    const { categoryName } = useParams();
-
     const { setIsSearchModalOpen } = useContext(ProductReducerContext);
     const { responseData } = useContext(DataContext);
 
-    const category = responseData?.productCategories?.categories?.find((category) => category?.categoryName === categoryName);
     const products = responseData?.productData?.products
+    const categories = responseData?.productCategories?.categories
+    // console.log(categories)
 
-    const checkBoxArr = [...new Set(products?.map(({ brand }) => brand))]
+    const checkBoxArr = [...new Set(categories?.map(({ categoryName }) => categoryName))]
     const maxPrice = products?.reduce((acc, curr) => acc > curr?.price ? acc : curr?.price, 0);
 
     const [priceFilteredData, setPriceFilteredData] = useState(products);
-    const [checkedArr, setCheckedArr] = useState(products?.map(({ brand }) => brand))
+    const [checkedArr, setCheckedArr] = useState(categories?.map(({ categoryName }) => categoryName))
+    // console.log(checkedArr)
 
     const priceChangeHandler = (event) => {
         setPriceFilteredData(products?.filter(({ price }) => price <= event.target.value))
@@ -31,7 +30,8 @@ export const AllProductsPage = () => {
             } else {
                 setCheckedArr(checkedArr?.filter((category) => category !== event.target.value))
             }
-        } else {
+        }
+        else {
             setCheckedArr(checkBoxArr.filter((category) => category !== event.target.value))
             if (priceFilteredData) {
                 setPriceFilteredData(priceFilteredData)
@@ -41,9 +41,10 @@ export const AllProductsPage = () => {
 
         }
     }
-    const filteredData = priceFilteredData?.filter(({ brand }) => (
-        !checkedArr?.every(checkbox => (brand !== checkbox))
+    const filteredData = priceFilteredData?.filter(({ category }) => (
+        !checkedArr?.every(checkbox => category !== checkbox )
     ))
+
     const sortLoToHi = (event) => {
         if (event.target.checked) {
             filteredData ?
@@ -83,9 +84,9 @@ export const AllProductsPage = () => {
     }, [])
     return (
         <div className="products-page">
-            <div className="products-front" style={{ backgroundImage: `url(${category?.image})` }}>
+            <div className="products-front" >
                 <p className="products-page-title">
-                    {category?.categoryName}
+                    All Products
                 </p>
             </div>
             <div className="contents">
@@ -103,9 +104,9 @@ export const AllProductsPage = () => {
                         </label>}
                         <div className="brand-section">
                             <p>Brands</p>
-                            {checkBoxArr?.map((brand, index) => (
-                                <label className="brand-selector" key={index} onChange={checkBoxHandler}>
-                                    <input type="checkbox" name={brand} value={brand} defaultChecked /> {brand}
+                            {categories?.map((category) => (
+                                <label className="brand-selector" key={category?._id} onChange={checkBoxHandler}>
+                                    <input type="checkbox" name={category?.categoryName} value={category?.categoryName} defaultChecked /> {category?.categoryName}
                                 </label>
                             ))}
                         </div>
@@ -130,7 +131,7 @@ export const AllProductsPage = () => {
 
                                 filteredData.length === 0 ?
                                     <div className="not-available">
-                                        <p>Sorry, but there are no products that match both the selected price range and brands. Please try adjusting your filters or selecting different options to find products that meet your criteria.</p>
+                                        <p>Sorry, but there are no products that match your selected price range and categories. Please adjust your filters or choose different options to find products that meet your criteria.</p>
                                     </div>
 
                                     : filteredData?.map((product) => (
