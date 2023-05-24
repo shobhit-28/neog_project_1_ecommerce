@@ -44,9 +44,6 @@
     .categories-parent {
         margin: auto;
 
-        grid-template-columns: repeat(2, 0.5);
-
-        grid-template-rows: repeat(3, 0.5);
         grid-row-gap: 0.5rem;
     }
 
@@ -61,18 +58,25 @@
     .categories-parent {
         display: block;
         width: 80%;
-        margin: auto;
     }
-
+    
     .categories {
         display: block;
         width: 100%;
+        margin: 0.5rem auto !important;
     }
 
     .front-img .img-head {
         line-height: 0.75rem;
         font-size: 0.5rem;
     }
+
+    .categories .category-head {
+        background-color: rgba(0, 0, 0, 0.4);
+        visibility: visible !important;
+    }
+
+
 }
 
 .categories {
@@ -131,17 +135,3 @@
 .category-img-container img {
     width: 100%;
 }
-
-
-
-/* .card-q3 p {
-    margin: 1.5rem;
-}
-.card-q3 h3 {
-    position: absolute;
-    top: 78%;
-    right: 1rem;
-    margin: 0.5rem 0 1.5rem 1.5rem;
-    font-size: 1rem;
-    color: #fff;
-} */

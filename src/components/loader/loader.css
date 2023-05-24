@@ -10,9 +10,3 @@
     background-color: var(--blue-200);
     opacity: 0.9;
   }
-
-  .loader .loading {
-    width: 100rem;
-    height: 100rem;
-    color: aqua;
-  }

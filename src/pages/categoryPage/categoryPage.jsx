@@ -128,7 +128,7 @@ export const CategoryPage = () => {
                     <div className="other-categories">
                         <p className="heading">Other Categories</p>
                         <div className="contents">
-                            {otherCategories.map((category) => (
+                            {otherCategories?.map((category) => (
                                 <div className="other-category" key={category?._id}>
                                     <div className="category-img-container">
                                         <img src={category?.image} alt="" />

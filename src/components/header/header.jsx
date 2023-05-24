@@ -1,13 +1,14 @@
 import { NavLink, Link, useNavigate } from "react-router-dom"
 import React, { useContext, useState } from "react";
-import { FaSearch, FaTimes, FaAlignJustify } from "react-icons/fa";
+import { FaSearch, FaTimes, FaAlignJustify, FaShoppingCart, FaRegHeart } from "react-icons/fa";
+import { CgProfile } from "react-icons/cg";
 import './header.css';
 import { ProductReducerContext } from "../../contexts/productReducerContext/productReducerContext";
 import { AuthContext } from "../../contexts/authContext";
 
 export const Header = () => {
     const { searchHandler, searchData, isSearchModalOpen, searchBarData } = useContext(ProductReducerContext);
-    const { isLoggedIn } = useContext(AuthContext)
+    const { isLoggedIn, wishlistedIds, cartItemsIds } = useContext(AuthContext)
 
     const [menuState, setMenuState] = useState(false);
     const navigate = useNavigate();
@@ -34,14 +35,11 @@ export const Header = () => {
                     <button className="menuBtn" onClick={() => setMenuState(!menuState)}> {menuState ? <FaTimes /> : <FaAlignJustify />}  </button>
                 </div>
                 <nav className="nav-links">
-                    <NavLink to='/products' className='nav-link'>Explore</NavLink>
-                    <NavLink to='/wishlist' className='nav-link'>Wishlist</NavLink>
-                    <NavLink to='/cart' className='nav-link'>Cart</NavLink>
-                    {isLoggedIn
-                        ?
-                        <NavLink to='/profile' className='nav-link'>Profile</NavLink>
-                        :
-                        <NavLink to='/login' className='nav-link'>Login</NavLink>}
+                    {!isLoggedIn && <NavLink to='/login' className='nav-link nav-btn'>Login</NavLink>}
+                    <NavLink to='/products' className='nav-link nav-btn'>Explore</NavLink>
+                    <NavLink to='/wishlist' className='nav-link'><FaRegHeart className="nav-icon" />{wishlistedIds?.length > 0 && <sub className="nav-quantity">{wishlistedIds?.length}</sub>}</NavLink>
+                    <NavLink to='/cart' className='nav-link'><FaShoppingCart className="nav-icon"/>{cartItemsIds?.length > 0 && <sub className="nav-quantity">{cartItemsIds?.length}</sub>}</NavLink>
+                    {isLoggedIn && <NavLink to='/profile' className='nav-link'><CgProfile className="nav-icon" /></NavLink>}
                 </nav>
             </div>
             {searchData.length > 0 && isSearchModalOpen && <div className="search-results">
@@ -71,7 +69,11 @@ export const Header = () => {
                         <NavLink to='/products' className='nav-link'>Explore</NavLink>
                         <NavLink to='/wishlist' className='nav-link'>Wishlist</NavLink>
                         <NavLink to='/cart' className='nav-link'>Cart</NavLink>
-                        <NavLink to='/login' className='nav-link'>Login</NavLink>
+                        {isLoggedIn
+                        ?
+                        <NavLink to='/profile' className='nav-link'>Profile</NavLink>
+                        :
+                        <NavLink to='/login' className='nav-link'>Login</NavLink>}
                     </nav>
                 </div>
             }
