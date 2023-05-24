@@ -20,13 +20,13 @@ export const CategoryPage = () => {
     const otherCategories = responseData?.productCategories?.categories?.filter((category) => category?.categoryName !== categoryName);
 
     const checkBoxArr = [...new Set(products?.map(({ brand }) => brand))]
-    const maxPrice = products?.reduce((acc, curr) => acc > curr?.price ? acc : curr?.price, 0);
+    const maxPrice = products?.reduce((acc, curr) => acc > (curr?.price - (curr?.price * (curr.discountPercentage / 100))) ? acc : (curr?.price - (curr?.price * (curr.discountPercentage / 100))), 0) + 1;
 
     const [priceFilteredData, setPriceFilteredData] = useState(products);
     const [checkedArr, setCheckedArr] = useState(products?.map(({ brand }) => brand))
 
     const priceChangeHandler = (event) => {
-        setPriceFilteredData(products?.filter(({ price }) => price <= event.target.value))
+        setPriceFilteredData(products?.filter((product) => (product?.price - (product?.price * (product.discountPercentage / 100))) <= event.target.value))
     }
     const checkBoxHandler = (event) => {
         if (checkedArr) {
@@ -58,7 +58,7 @@ export const CategoryPage = () => {
                 setPriceFilteredData(products?.sort((a, b) => (a?.price - (a?.price * (a.discountPercentage / 100))) - (b?.price - (b?.price * (b?.discountPercentage / 100)))));
         }
     }
-    
+
     const sortHiToLo = (event) => {
         if (event.target.checked) {
             filteredData ?
@@ -117,7 +117,7 @@ export const CategoryPage = () => {
                                 <div className="prices">
                                     <p>0</p>
                                     <p>₹ {Math.round(maxPrice / 2)}</p>
-                                    <p>₹ {Math.round(maxPrice)}</p>
+                                    <p>₹ {Math.round(maxPrice - 1)}</p>
                                 </div>
                                 <input type="range" className="price-slider" min='0' max={maxPrice + 1} defaultValue={maxPrice + 1} onChange={priceChangeHandler} />
                             </label>}
@@ -166,14 +166,20 @@ export const CategoryPage = () => {
                                             <p>Sorry, but there are no products that match both the selected price range and brands. Please try adjusting your filters or selecting different options to find products that meet your criteria.</p>
                                         </div>
 
-                                        : filteredData?.map((product) => (
-                                            <Products product={product} key={product?._id} />
-                                        ))
+                                        : <div className="product-card-container">
+                                            {filteredData?.map((product) => (
+                                                <Products product={product} key={product?._id} />
+                                            ))}
+                                        </div>
 
                                     :
-                                    products?.map((product) => (
-                                        <Products product={product} key={product?._id} />
-                                    ))
+                                    <div className="product-card-container">
+                                        {products?.map((product) => (
+                                            <Products product={product} key={product?._id} />
+                                        ))}
+                                    </div>
+
+
                             }
                         </div>
                     </div>
