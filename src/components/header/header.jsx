@@ -7,12 +7,13 @@ import { ProductReducerContext } from "../../contexts/productReducerContext/prod
 import { AuthContext } from "../../contexts/authContext";
 
 export const Header = () => {
-    const { searchHandler, searchData, isSearchModalOpen, searchBarData, menuState, setMenuState } = useContext(ProductReducerContext);
+    const { searchHandler, searchData, isSearchModalOpen, searchBarData, menuState, setMenuState, setIsSearchModalOpen } = useContext(ProductReducerContext);
     const { isLoggedIn, wishlistedIds, cartItemsIds } = useContext(AuthContext)
 
     const navigate = useNavigate();
 
     const searchClickHandler = () => {
+        setIsSearchModalOpen(false)
         if (searchBarData.length === 0) {
             alert('Enter a keyword or product name in the search bar above to start exploring.')
         } else if (searchData.length === 0) {
@@ -20,6 +21,16 @@ export const Header = () => {
         } else {
             navigate('/search')
         }
+    }
+
+    const singleProductNavigationHandler = (productId) => {
+        setTimeout(() => {
+            navigate('/')
+        },0)
+        setTimeout(() => {
+            navigate(`/product/${productId}`)
+        },1)
+        
     }
 
     return (
@@ -43,7 +54,7 @@ export const Header = () => {
             </div>
             {searchData.length > 0 && isSearchModalOpen && <div className="search-results">
                 {searchData.map((product) => (
-                    <div className="search-result" key={product?.id} onClick={() => navigate(`/product/${product?.id}`)} >
+                    <div className="search-result" key={product?.id} onClick={() => singleProductNavigationHandler(product?._id)} >
                         <div className="img-container">
                             <img src={product?.thumbnail} alt={product?.title} />
                         </div>
