@@ -5,8 +5,9 @@ import { ProductReducerContext } from '../../contexts/productReducerContext/prod
 
 export const ProfilePage = () => {
     const { logOut } = useContext(AuthContext)
-    const { addressData, editAddress, addAddress, removeAddress} = useContext(ProductReducerContext);
+    const { addressData, editAddress, addAddress, removeAddress } = useContext(ProductReducerContext);
 
+    const [isAddressVsisible, setIsAddressVsisible] = useState(false)
     const [editOpen, setEditOpen] = useState([]);
     const [addAddressOpen, setAddAddressOpen] = useState(false)
     const [editData, setEditData] = useState({
@@ -123,61 +124,77 @@ export const ProfilePage = () => {
         }
     }
 
+    const openProfileClickHandler = () => {
+        setAddAddressOpen(false)
+        setIsAddressVsisible(false)
+        setEditOpen([])
+    }
+
     return (
         <div className="profile-page">
             <div className="modal">
-                <div className="profile-section">
-                    <p className="user-name">{localStorage.getItem('userName')}</p>
-                    <p className="user-name">{localStorage.getItem('userEmail')}</p>
-                    <button className="logout" onClick={logOut}>Logout</button>
+                <div className="profile-modal-btn-container">
+                    <button className={!isAddressVsisible && 'is-active'} onClick={() => openProfileClickHandler()}>Profile</button>
+                    <button className={isAddressVsisible && 'is-active'} onClick={() => setIsAddressVsisible(true)}>Address</button>
                 </div>
-                <div className="address-section">
-                    <div className="add-address">
-                        {addAddressOpen
-                            ?
-                            <div className="add-address-form">
-                                <input type="text" name="" id="" placeholder='name' className="name-input" onChange={nameAddHandler} />
-                                <input type="number" name="" id="" placeholder='phone' className="phone-input" onChange={phoneAddHandler} />
-                                <input type="number" name="" id="" placeholder='pin-code' className="pincode-input" onChange={pinAddHandler} />
-                                <input type="text" name="" id="" placeholder='city' className="city-input" onChange={cityAddHandler} />
-                                <input type="text" name="" id="" placeholder='state' className="state-input" onChange={stateAddHandler} />
-                                <textarea name="" id="" cols="10" rows="10" placeholder='address' onChange={addressAddHandler}></textarea>
-                                <button className="add-address" onClick={addAddressClickHandler}>Add address</button>
-                                <button className="cancel-add-address" onClick={() => setAddAddressOpen(false)} >Cancel</button>
+                {
+                    !isAddressVsisible ?
+                        <div className="profile-section-container">
+                            <div className="profile-section">
+                                <p className="user-name">{localStorage.getItem('userName')}</p>
+                                <p className="user-email">{localStorage.getItem('userEmail')}</p>
+                                <button className="logout" onClick={logOut}>Logout</button>
                             </div>
-                            :
-                            <div className="open-add-address-div">
-                                <button className="add-address-btn" onClick={() => setAddAddressOpen(true)} >Add Address</button>
-                            </div>
-                        }
-                    </div>
-                    {addressData?.map((address) => (
-                        <div className="address-div" key={address?.id}>
-                            {!editOpen?.includes(address?.id) ?
-                                <div className="address">
-                                    <p className="name">{address?.name}</p>
-                                    <p className="phone">{address?.phone}</p>
-                                    <p className="city">{address?.city}</p>
-                                    <p className="pin-code">{address?.pin}</p>
-                                    <p className="state">{address?.state}</p>
-                                    <p className="address">{address?.address}</p>
-                                    <button className="open-edit" onClick={() => editOpenClickHandler(address)} >Edit</button>
-                                    <button className="remove-address" onClick={() => removeAddress(address?.id)} >Remove Address</button>
-                                </div> :
-                                <div className="edit-address">
-                                    <input type="text" name="" id="" placeholder='name' className="name-input" defaultValue={address?.name} onChange={nameChangeHandler} />
-                                    <input type="number" name="" id="" placeholder='phone' className="phone-input" defaultValue={address?.phone} onChange={phoneChangeHandler} />
-                                    <input type="number" name="" id="" placeholder='pin-code' className="pincode-input" defaultValue={address?.pin} onChange={pinCHangeHandler} />
-                                    <input type="text" name="" id="" placeholder='city' className="city-input" defaultValue={address?.city} onChange={cityChangeHandler} />
-                                    <input type="text" name="" id="" placeholder='state' className="state-input" defaultValue={address?.state} onChange={stateChangeHandler} />
-                                    <textarea name="" id="" cols="10" rows="10" placeholder='address' defaultValue={address?.address} onChange={addressChangeHandler}></textarea>
-                                    <button className="edit-address" onClick={() => editAddressClickHandler(address?.id)} >Edit</button>
-                                    <button className="cancel-edit-address" onClick={() => setEditOpen(editOpen?.filter((id) => id !== address?.id))}>Cancel</button>
-                                </div>
-                            }
                         </div>
-                    ))}
-                </div>
+                        :
+                        <div className="address-section">
+                            <div className="add-address">
+                                {addAddressOpen
+                                    ?
+                                    <div className="add-address-form">
+                                        <input type="text" name="" id="" placeholder='name' className="name-input" onChange={nameAddHandler} />
+                                        <input type="number" name="" id="" placeholder='phone' className="phone-input" onChange={phoneAddHandler} />
+                                        <input type="number" name="" id="" placeholder='pin-code' className="pincode-input" onChange={pinAddHandler} />
+                                        <input type="text" name="" id="" placeholder='city' className="city-input" onChange={cityAddHandler} />
+                                        <input type="text" name="" id="" placeholder='state' className="state-input" onChange={stateAddHandler} />
+                                        <textarea name="" id="" cols="10" rows="10" placeholder='address' onChange={addressAddHandler}></textarea>
+                                        <button className="add-address" onClick={addAddressClickHandler}>Add address</button>
+                                        <button className="cancel-add-address" onClick={() => setAddAddressOpen(false)} >Cancel</button>
+                                    </div>
+                                    :
+                                    <div className="open-add-address-div">
+                                        <button className="add-address-btn" onClick={() => setAddAddressOpen(true)} >Add Address</button>
+                                    </div>
+                                }
+                                <hr />
+                            </div>
+                            {addressData?.map((address) => (
+                                <div className="address-div" key={address?.id}>
+                                    {!editOpen?.includes(address?.id) ?
+                                        <div className="address">
+                                            <p className="name">{address?.name}</p>
+                                            <p className="phone">{address?.phone}</p>
+                                            <p className="city">{address?.city}</p>
+                                            <p className="pin-code">{address?.pin}</p>
+                                            <p className="state">{address?.state}</p>
+                                            <p className="address">{address?.address}</p>
+                                            <button className="open-edit" onClick={() => editOpenClickHandler(address)} >Edit</button>
+                                            <button className="remove-address" onClick={() => removeAddress(address?.id)} >Remove</button>
+                                        </div> :
+                                        <div className="edit-address">
+                                            <input type="text" name="" id="" placeholder='name' className="name-input" defaultValue={address?.name} onChange={nameChangeHandler} />
+                                            <input type="number" name="" id="" placeholder='phone' className="phone-input" defaultValue={address?.phone} onChange={phoneChangeHandler} />
+                                            <input type="number" name="" id="" placeholder='pin-code' className="pincode-input" defaultValue={address?.pin} onChange={pinCHangeHandler} />
+                                            <input type="text" name="" id="" placeholder='city' className="city-input" defaultValue={address?.city} onChange={cityChangeHandler} />
+                                            <input type="text" name="" id="" placeholder='state' className="state-input" defaultValue={address?.state} onChange={stateChangeHandler} />
+                                            <textarea name="" id="" cols="10" rows="10" placeholder='address' defaultValue={address?.address} onChange={addressChangeHandler}></textarea>
+                                            <button className="edit-address" onClick={() => editAddressClickHandler(address?.id)} >Edit</button>
+                                            <button className="cancel-edit-address" onClick={() => setEditOpen(editOpen?.filter((id) => id !== address?.id))}>Cancel</button>
+                                        </div>
+                                    }
+                                </div>
+                            ))}
+                        </div>}
             </div>
         </div>
     )
