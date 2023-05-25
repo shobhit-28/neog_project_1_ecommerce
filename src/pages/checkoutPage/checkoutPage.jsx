@@ -4,6 +4,7 @@ import { Navigate, useNavigate } from 'react-router';
 import { ProductReducerContext } from '../../contexts/productReducerContext/productReducerContext';
 import { CartContext } from '../../contexts/cartContext';
 import { Loader } from '../../components/loader/loader';
+import { toast } from 'react-toastify';
 
 export const CheckoutPage = () => {
     const encodedToken = localStorage?.getItem('encodedToken');
@@ -35,12 +36,25 @@ export const CheckoutPage = () => {
     expectedDate = dd + '-' + mm + '-' + yy;
 
     const orderHandler = () => {
-        setIsModalOpen(true)
-        clearCart()
-        setTimeout(() => {
-            setCartData([])
-            navigate("/");
-        }, 4000);
+        if (addressData?.length > 0) {
+            setIsModalOpen(true)
+            clearCart()
+            setTimeout(() => {
+                setCartData([])
+                navigate("/");
+            }, 4000);
+        } else {
+            toast.warn('It is essential to provide a valid shipping address', {
+                position: "bottom-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                });
+        }
     }
 
     const fetchData = async () => {
