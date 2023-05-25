@@ -3,11 +3,13 @@ import './cartPage.css'
 import { CartContext } from '../../contexts/cartContext';
 import { PriceCard } from '../../components/priceCard/priceCard';
 import { Loader } from '../../components/loader/loader';
+import { ProductReducerContext } from '../../contexts/productReducerContext/productReducerContext';
 
 export const CartPage = () => {
     const encodedToken = localStorage?.getItem('encodedToken');
 
     const { removeFromCart, incDecCart } = useContext(CartContext);
+    const { setIsSearchModalOpen, setMenuState } = useContext(ProductReducerContext)
 
     const [cartData, setCartData] = useState(undefined);
 
@@ -40,6 +42,8 @@ export const CartPage = () => {
 
     useEffect(() => {
         fetchData()
+        setIsSearchModalOpen(false)
+        setMenuState(false)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -63,9 +67,11 @@ export const CartPage = () => {
                                         <div className="cart-content">
                                             <p className="product-name">{product?.title}</p>
                                             <p className="cart-price">₹ {Math.round(product?.price - (product?.price * (product?.discountPercentage / 100)))} <span className="original-price">₹ {Math.round(product?.price)}</span></p>
-                                            <button className="increase" onClick={() => increaseItems(product?._id)}>+</button>
-                                            <p className="quantity">{product?.qty}</p>
-                                            <button className="decrease" onClick={() => product?.qty > 1 ? decreaseItems(product?._id) : removeFromCartClickHandler(product?._id)}>-</button>
+                                            <div className="quantity-handler">
+                                                <button className="increase" onClick={() => increaseItems(product?._id)}>+</button>
+                                                <p className="quantity">{product?.qty}</p>
+                                                <button className="decrease" onClick={() => product?.qty > 1 ? decreaseItems(product?._id) : removeFromCartClickHandler(product?._id)}>-</button>
+                                            </div>
                                             <button className="remove-from-cart" onClick={() => removeFromCartClickHandler(product?._id)}>Remove from cart</button>
                                         </div>
                                     </div>
