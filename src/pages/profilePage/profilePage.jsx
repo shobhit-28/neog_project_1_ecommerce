@@ -1,11 +1,11 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import './profilePage.css'
 import { AuthContext } from '../../contexts/authContext'
 import { ProductReducerContext } from '../../contexts/productReducerContext/productReducerContext'
 
 export const ProfilePage = () => {
     const { logOut } = useContext(AuthContext)
-    const { addressData, editAddress, addAddress, removeAddress } = useContext(ProductReducerContext);
+    const { addressData, editAddress, addAddress, removeAddress, setMenuState, setIsSearchModalOpen } = useContext(ProductReducerContext);
 
     const [isAddressVsisible, setIsAddressVsisible] = useState(false)
     const [editOpen, setEditOpen] = useState([]);
@@ -129,6 +129,12 @@ export const ProfilePage = () => {
         setIsAddressVsisible(false)
         setEditOpen([])
     }
+
+    useEffect(() => {
+        setIsSearchModalOpen(false)
+        setMenuState(false)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <div className="profile-page">

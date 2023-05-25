@@ -48,45 +48,44 @@ export const CartPage = () => {
     }, [])
 
     return (
-        <div className="cart-page">
-            {!cartData
-                ?
-                <Loader />
-                :
-                <>
-                    <p className="cart-heading">Cart</p>
-                    {cartData?.length > 0
-                        ?
-                        <div className="cart-parent">
-                            <div className="cart-products">
-                                {cartData?.map((product) => (
-                                    <div className="cart-product" key={product?._id}>
-                                        <div className="cart-img-container">
-                                            <img src={product?.thumbnail} alt={product?.title} />
-                                        </div>
-                                        <div className="cart-content">
-                                            <p className="product-name">{product?.title}</p>
-                                            <p className="cart-price">₹ {Math.round(product?.price - (product?.price * (product?.discountPercentage / 100)))} <span className="original-price">₹ {Math.round(product?.price)}</span></p>
-                                            <div className="quantity-handler">
-                                                <button className="increase" onClick={() => increaseItems(product?._id)}>+</button>
-                                                <p className="quantity">{product?.qty}</p>
-                                                <button className="decrease" onClick={() => product?.qty > 1 ? decreaseItems(product?._id) : removeFromCartClickHandler(product?._id)}>-</button>
-                                            </div>
-                                            <button className="remove-from-cart" onClick={() => removeFromCartClickHandler(product?._id)}>Remove from cart</button>
-                                        </div>
+
+        !cartData
+            ?
+            <Loader />
+            :
+            <div className="cart-page">
+                <p className="cart-heading">Cart</p>
+                {cartData?.length > 0
+                    ?
+                    <div className="cart-parent">
+                        <div className="cart-products">
+                            {cartData?.map((product) => (
+                                <div className="cart-product" key={product?._id}>
+                                    <div className="cart-img-container">
+                                        <img src={product?.thumbnail} alt={product?.title} />
                                     </div>
-                                ))}
-                            </div>
-                            <div className="cart-price-card">
-                                <PriceCard cartData={cartData} />
-                            </div>
+                                    <div className="cart-content">
+                                        <p className="product-name">{product?.title}</p>
+                                        <p className="cart-price">₹ {Math.round(product?.price - (product?.price * (product?.discountPercentage / 100)))} <span className="original-price">₹ {Math.round(product?.price)}</span></p>
+                                        <div className="quantity-handler">
+                                            <button className="increase" onClick={() => increaseItems(product?._id)}>+</button>
+                                            <p className="quantity">{product?.qty}</p>
+                                            <button className="decrease" onClick={() => product?.qty > 1 ? decreaseItems(product?._id) : removeFromCartClickHandler(product?._id)}>-</button>
+                                        </div>
+                                        <button className="remove-from-cart" onClick={() => removeFromCartClickHandler(product?._id)}>Remove from cart</button>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
-                        :
-                        <div className="empty-cart">
-                            <h1 className="empty-cart">Empty Cart</h1>
+                        <div className="cart-price-card">
+                            <PriceCard cartData={cartData} />
                         </div>
-                    }
-                </>}
-        </div>
+                    </div>
+                    :
+                    <div className="empty-cart">
+                        <h1 className="empty-cart">Empty Cart</h1>
+                    </div>
+                }
+            </div>
     )
 }
