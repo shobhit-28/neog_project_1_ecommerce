@@ -50,40 +50,53 @@ export const SignupPage = () => {
         navigate('/')
     } else {
         return (
-            <div className="sign-up-page">
-                <form action="submit" className="signup" onChange={validateForm}>
-                    <label className="name">
-                        <span className="input-title">Name: </span>
-                        <input type="text" name="" id="name"
-                            onChange={(event) => setSignupInputData({ ...signupInputData, name: event.target.value })}
-                        />
-                        {showErrors && !isValid?.isName && <p className="name-error">name should be at least two letters long</p>}
-                    </label>
-                    <label className="email">
-                        <span className="input-title">Email: </span>
-                        <input type="email" name="" id="email"
-                            onChange={mailChangeHandler}
-                        />
-                        {showErrors && !isValid?.isEmail && <p className="email-error">Please enter a valid email address.</p>}
-                    </label>
-                    <label className="password">
-                        <span className="input-title">Password: </span>
-                        <input type="password" name="" id="pass"
-                            onChange={passwordChangeHandler}
-                        />
-                        {showErrors && !isValid?.isPassword && <p className="password-error">password should be between 8 to 20 characters long and should contain at least one special character</p>}
-                    </label>
-                    <label className="confirm-password">
-                        <span className="input-title">Confirm Password: </span>
-                        <input type="password" name="" id="confirmPass"
-                            onChange={confirmPasswordChangeHandler}
-                        />
-                        {showErrors && !isValid?.isPassAndConfirmPassEqual && <p className="password-not-equal-error">password and confirm password fields do not match</p>}
-                    </label>
-                </form>
-                {<button className="sign-up" onClick={signUpClickHandler}>
-                    Sign Up
-                </button>}
+            <div className="signup-page">
+                <div className="signup-modal">
+                    <p className="signup-heading">
+                        Sign Up
+                    </p>
+                    <form action="submit" className="signup" onChange={validateForm}>
+                        <div className="input-field-container">
+                            <label className="name">
+                                <span className="input-title">Name: </span>
+                                <input type="text" name="" id="name"
+                                    onChange={(event) => setSignupInputData({ ...signupInputData, name: event.target.value })}
+                                />
+                                {showErrors && !isValid?.isName && <p className="name-error error">name should be at least two letters long</p>}
+                            </label>
+                        </div>
+                        <div className="input-field-container">
+                            <label className="email">
+                                <span className="input-title">Email: </span>
+                                <input type="email" name="" id="email"
+                                    onChange={mailChangeHandler}
+                                />
+                                {showErrors && !isValid?.isEmail && <p className="email-error error">Please enter a valid email address.</p>}
+                            </label>
+                        </div>
+                        <div className="input-field-container">
+                            <label className="password">
+                                <span className="input-title">Password: </span>
+                                <input type="password" name="" id="pass"
+                                    onChange={passwordChangeHandler}
+                                />
+                                {showErrors && !isValid?.isPassword && <p className="password-error error">password should be between 8 to 20 characters long and should contain at least one special character</p>}
+                            </label>
+                        </div>
+                        <div className="input-field-container">
+                            <label className="confirm-password">
+                                <span className="input-title">Confirm Password: </span>
+                                <input type="password" name="" id="confirmPass"
+                                    onChange={confirmPasswordChangeHandler}
+                                />
+                                {showErrors && !isValid?.isPassAndConfirmPassEqual && <p className="password-not-equal-error error">password and confirm password fields do not match</p>}
+                            </label>
+                        </div>
+                    </form>
+                    <button className="signup-btn" onClick={signUpClickHandler}>
+                        Sign Up
+                    </button>
+                </div>
             </div>
         )
     }
