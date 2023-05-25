@@ -110,7 +110,7 @@ export const AllProductsPage = () => {
                                 <input type="range" className="price-slider" min='0' max={maxPrice + 1} defaultValue={maxPrice + 1} onChange={priceChangeHandler} />
                             </label>}
                             <div className="brand-section">
-                                <p>Brands</p>
+                                <p>Categories</p>
                                 {categories?.map((category) => (
                                     <label className="brand-selector" key={category?._id} onChange={checkBoxHandler}>
                                         <input type="checkbox" name={category?.categoryName} value={category?.categoryName} defaultChecked /> {category?.categoryName}

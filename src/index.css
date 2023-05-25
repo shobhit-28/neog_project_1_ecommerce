@@ -53,3 +53,8 @@ input::-webkit-outer-spin-button {
     margin: 0;
     -webkit-appearance: none;
 }
+
+html {
+    font-size: 100%;
+    scroll-behavior: smooth;
+  }
