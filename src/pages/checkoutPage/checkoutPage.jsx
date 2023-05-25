@@ -3,6 +3,7 @@ import './checkout.css'
 import { Navigate, useNavigate } from 'react-router';
 import { ProductReducerContext } from '../../contexts/productReducerContext/productReducerContext';
 import { CartContext } from '../../contexts/cartContext';
+import { Loader } from '../../components/loader/loader';
 
 export const CheckoutPage = () => {
     const encodedToken = localStorage?.getItem('encodedToken');
@@ -39,7 +40,7 @@ export const CheckoutPage = () => {
         setTimeout(() => {
             setCartData([])
             navigate("/");
-        }, 6000);
+        }, 4000);
     }
 
     const fetchData = async () => {
@@ -65,85 +66,88 @@ export const CheckoutPage = () => {
     return (
         <div className="checkout-page">
             {isModalOpen ?
-                <div className="checkout-modal">
-                    <p className="heading">Order Confirmed</p>
-                    <div className="details">
-                        <p className="total-price">Total Price: ₹ {totalPrice}</p>
-                        <p className="eta">Expected Delivery: {expectedDate}</p>
-                        <p className="declaration">Order will be delivered to: </p>
-                        <p className="recipient-name">{selectedAddress?.name}</p>
-                        <p className="recipient-address">{selectedAddress?.address}</p>
-                        <p className="recipient-number">Phone Number: {selectedAddress?.phone}</p>
+                <div className="modal-container">
+                    <div className="checkout-modal">
+                        <p className="heading">Order Confirmed</p>
+                        <div className="details">
+                            <p className="total-price">Total Price: ₹ {totalPrice}</p>
+                            <p className="eta">Expected Delivery: {expectedDate}</p>
+                            <p className="declaration">Order will be delivered to: </p>
+                            <p className="recipient-name">{selectedAddress?.name}</p>
+                            <p className="recipient-address">{selectedAddress?.address}</p>
+                            <p className="recipient-number">Phone Number: {selectedAddress?.phone}</p>
+                        </div>
                     </div>
                 </div>
-            :
-            !cartData
-                ?
-                <div className="loading">
-                    <h1 className="loading">
-                        Loading
-                    </h1>
-                </div>
                 :
-                <>
-                    {cartData?.length > 0
-                        ?
-                        <div className="checkout-parent">
-                            <p className="heading">Checkout</p>
+                !cartData
+                    ?
+                    <Loader />
+                    :
+                    <>
+                        {cartData?.length > 0
+                            ?
+                            <>
+                                <h1 className="checkout-heading">Checkout</h1>
+                                <div className="checkout-parent">
 
-                            <div className="address-div">
-                                {addressData?.map((address) => (
-                                    <label className="address-label" key={address?.id} >
-                                        <input type="radio" name="address" id="" value={address?.id} onClick={(event) => setSelectedAddressId(event?.target?.value)} />
-                                        <p className="name">{address?.name}</p>
-                                        <p className="address">{address?.pin}, {address?.address}</p>
-                                        <p className="city">{address?.city}</p>
-                                        <p className="state">{address?.state}</p>
-                                    </label>
-                                ))}
-                            </div>
+                                    <div className="address-div">
+                                        {addressData?.map((address) => (
+                                            <div className="radio-container">
+                                                <label className="address-label" key={address?.id} >
+                                                    <section className="radio">
+                                                        <input type="radio" name="address" id="" value={address?.id} onClick={(event) => setSelectedAddressId(event?.target?.value)} />
+                                                        <p className="name">{address?.name}</p>
+                                                    </section>
+                                                    <p className="address">{address?.pin}, {address?.address}</p>
+                                                    <p className="city">{address?.city}</p>
+                                                    <p className="state">{address?.state}</p>
+                                                </label>
+                                            </div>
+                                        ))}
+                                    </div>
 
-                            <div className="checkout-card">
-                                <p className="heading">Order Details</p>
-                                {cartData?.map((cartItem) => (
-                                    <div className="product-price-name" key={cartItem?._id}>
-                                        <p className="item-title">{`${cartItem?.title}`}</p>
-                                        <p className="item-price">{`${cartItem?.qty}`}</p>
+                                    <div className="checkout-card">
+                                        <p className="heading">Order Details</p>
+                                        {cartData?.map((cartItem) => (
+                                            <div className="product-price-name" key={cartItem?._id}>
+                                                <p className="item-title">{`${cartItem?.title}`}</p>
+                                                <p className="item-price">{`(${cartItem?.qty})`}</p>
+                                            </div>
+                                        ))}
+                                        <p className="heading">Price Details</p>
+                                        <div className="price-details">
+                                            <div className="price">
+                                                <p className="price-heading">Price ({cartData?.length} items) </p>
+                                                <p className="price">{`₹ ${Math.round(((cartData?.reduce((acc, curr) => acc + (curr?.price * curr?.qty), 0)) + Number.EPSILON) * 100) / 100}`}</p>
+                                            </div>
+                                            <div className="discount">
+                                                <p className="discount-heading">Discount</p>
+                                                <p className="discount">{`-₹ ${Math.round(((cartData?.reduce((acc, curr) => acc + ((curr?.price * (curr.discountPercentage / 100)) * curr?.qty), 0)) + Number.EPSILON) * 100) / 100}`}</p>
+                                            </div>
+                                            <div className="delivery">
+                                                <p className="delivery-heading">Delivery</p>
+                                                <p className="delivery-charge">₹ 250</p>
+                                            </div>
+                                            <div className="total-price">
+                                                <p className="total-price-heading">Total Price</p>
+                                                <p className="total-price">{`₹ ${totalPrice + 250}`}</p>
+                                            </div>
+                                        </div>
+                                        <div className="address">
+                                            <p className="heading">Deliver to</p>
+                                            <p className="name">{selectedAddress?.name}</p>
+                                            <p className="phone">{selectedAddress?.phone}</p>
+                                        </div>
+                                        <button className="place-order" onClick={() => orderHandler()}>Place Order</button>
                                     </div>
-                                ))}
-                                <p className="price-details">Price Details</p>
-                                <p className="heading">Order Details</p>
-                                <div className="price-details">
-                                    <div className="price">
-                                        <p className="price-heading">Price ({cartData?.length} items) </p>
-                                        <p className="price">{`₹ ${Math.round(((cartData?.reduce((acc, curr) => acc + (curr?.price * curr?.qty), 0)) + Number.EPSILON) * 100) / 100}`}</p>
-                                    </div>
-                                    <div className="discount">
-                                        <p className="discount-heading">Discount</p>
-                                        <p className="discount">{`-₹ ${Math.round(((cartData?.reduce((acc, curr) => acc + ((curr?.price * (curr.discountPercentage / 100)) * curr?.qty), 0)) + Number.EPSILON) * 100) / 100}`}</p>
-                                    </div>
-                                    <div className="delivery">
-                                        <p className="delivery-heading">Delivery</p>
-                                        <p className="delivery-charge">₹ 250</p>
-                                    </div>
-                                    <div className="total-price">
-                                        <p className="total-price-heading">Delivery</p>
-                                        <p className="total-price">{`₹ ${totalPrice + 250}`}</p>
-                                    </div>
+
                                 </div>
-                                <div className="address">
-                                    <p className="heading">Deliver to</p>
-                                    <p className="name">{selectedAddress?.name}</p>
-                                    <p className="phone">{selectedAddress?.phone}</p>
-                                </div>
-                                <button className="place-order" onClick={() => orderHandler()}>Place Order</button>
-                            </div>
-
-                        </div>
-                        :
-                        <Navigate to='/' />
-                    }
-                </>}
+                            </>
+                            :
+                            <Navigate to='/' />
+                        }
+                    </>}
         </div>
     )
 }
