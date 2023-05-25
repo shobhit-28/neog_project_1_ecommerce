@@ -1,6 +1,7 @@
 import { createContext, useContext } from "react";
 import { AuthContext } from "./authContext";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 export const CartContext = createContext();
 
@@ -15,7 +16,16 @@ export const CartHandler = ({ children }) => {
         if (isLoggedIn) {
             try {
                 if (cartItemsIds.includes(product?.id)) {
-                    alert('already exists')
+                    toast.error('Item alreasy exists', {
+                        position: "bottom-center",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "dark",
+                        });
                 } else {
                     await fetch('/api/user/cart', {
                         method: 'POST',
@@ -23,7 +33,16 @@ export const CartHandler = ({ children }) => {
                         body: JSON.stringify({ product })
                     });
                     setCartItemsIds([...cartItemsIds, product?.id])
-                    alert('Item added to cart')
+                    toast.success('Item added to cart', {
+                        position: "bottom-center",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "dark",
+                        });
                 }
             } catch (error) {
                 console.error(error);
@@ -40,7 +59,16 @@ export const CartHandler = ({ children }) => {
                 headers: { authorization: encodedToken }
             });
             setCartItemsIds(cartItemsIds?.filter((id) => id !== productId))
-            alert('Item removed from cart')
+            toast.warn('Item removed from cart', {
+                position: "bottom-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                });
         } catch (error) {
             console.error(error)
         }

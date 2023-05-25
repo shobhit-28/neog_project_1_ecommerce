@@ -5,6 +5,7 @@ import { CgProfile } from "react-icons/cg";
 import './header.css';
 import { ProductReducerContext } from "../../contexts/productReducerContext/productReducerContext";
 import { AuthContext } from "../../contexts/authContext";
+import { toast } from "react-toastify";
 
 export const Header = () => {
     const { searchHandler, searchData, isSearchModalOpen, searchBarData, menuState, setMenuState, setIsSearchModalOpen } = useContext(ProductReducerContext);
@@ -15,9 +16,27 @@ export const Header = () => {
     const searchClickHandler = () => {
         setIsSearchModalOpen(false)
         if (searchBarData.length === 0) {
-            alert('Enter a keyword or product name in the search bar above to start exploring.')
+            toast('Enter a keyword or product name in the search bar above to start exploring.', {
+                position: "bottom-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
         } else if (searchData.length === 0) {
-            alert("Oops! We couldn't find any items matching your search criteria. Please try a different search term or browse through our categories to find what you're looking for.")
+            toast.warn("Oops! We couldn't find any items matching your search criteria. Please try a different search term or browse through our categories to find what you're looking for.", {
+                position: "bottom-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
         } else {
             navigate('/search')
         }
@@ -26,11 +45,11 @@ export const Header = () => {
     const singleProductNavigationHandler = (productId) => {
         setTimeout(() => {
             navigate('/')
-        },0)
+        }, 0)
         setTimeout(() => {
             navigate(`/product/${productId}`)
-        },1)
-        
+        }, 1)
+
     }
 
     return (

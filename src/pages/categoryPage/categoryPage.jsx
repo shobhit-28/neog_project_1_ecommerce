@@ -5,6 +5,7 @@ import { ProductReducerContext } from '../../contexts/productReducerContext/prod
 import { DataContext } from '../../contexts/dataContext';
 import { Products } from '../../components/products/products';
 import { Loader } from '../../components/loader/loader';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const CategoryPage = () => {
     const { categoryName } = useParams();

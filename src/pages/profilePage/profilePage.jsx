@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import './profilePage.css'
 import { AuthContext } from '../../contexts/authContext'
 import { ProductReducerContext } from '../../contexts/productReducerContext/productReducerContext'
+import { toast } from 'react-toastify'
 
 export const ProfilePage = () => {
     const { logOut } = useContext(AuthContext)
@@ -111,7 +112,16 @@ export const ProfilePage = () => {
             editAddress(addressId, editData)
             setEditOpen(editOpen?.filter((id) => id !== addressId))
         } else {
-            alert('All fields are necessary')
+            toast.warn('All fields are necessary', {
+                position: "bottom-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                });
         }
     }
 
@@ -120,7 +130,16 @@ export const ProfilePage = () => {
             addAddress(addAddressData)
             setAddAddressOpen(false)
         } else {
-            alert('All fields are necessary')
+            toast.warn('All fields are necessary', {
+                position: "bottom-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                });
         }
     }
 

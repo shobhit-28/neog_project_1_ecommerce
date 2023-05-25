@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import { toast } from "react-toastify";
 
 export const AuthContext = createContext();
 
@@ -48,7 +49,16 @@ export const AuthenticationHandler = ({ children }) => {
                 data?.foundUser?.wishlist?.length > 0 ? setWishlistedIds(data?.foundUser?.wishlist?.map(({ _id }) => _id)) : setWishlistedIds([])
                 data?.foundUser?.cart?.length > 0 ? setCartItemsIds(data?.foundUser?.cart?.map(({ _id }) => _id)) : setCartItemsIds([])
             } else {
-                alert(`Error ${response?.status}: ${data?.errors[0]}`);
+                toast.error(`Error ${response?.status}: ${data?.errors[0]}`, {
+                    position: "bottom-center",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                    });
             }
         } catch (error) {
             console.error(error);
@@ -78,7 +88,16 @@ export const AuthenticationHandler = ({ children }) => {
                     setWishlistedIds([])
                     setCartItemsIds([])
                 } else {
-                    alert(`Error ${response?.status}: ${data?.errors[0]}`);
+                    toast.error(`Error ${response?.status}: ${data?.errors[0]}`, {
+                        position: "bottom-center",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "dark",
+                        });
                 }
 
             } catch (error) {

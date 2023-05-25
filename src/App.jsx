@@ -17,6 +17,7 @@ import { CartPage } from "./pages/cartPage/cartPage";
 import { CheckoutPage } from "./pages/checkoutPage/checkoutPage";
 import { AllProductsPage } from "./pages/allProductsPage/allProductsPage";
 import { ProductPage } from "./pages/ProductPage";
+import { ToastContainer } from "react-toastify";
 
 function App() {
 
@@ -27,6 +28,18 @@ function App() {
   return (
     <div className="App">
       <Header />
+      <ToastContainer
+        position="bottom-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/mockman" element={<Mockman />} />
@@ -43,7 +56,7 @@ function App() {
         <Route path="/wishlist" element={<RequiresAuth><WishListPage /></RequiresAuth>} />
         <Route path="/cart" element={<RequiresAuth><CartPage /></RequiresAuth>} />
         <Route path="/checkout" element={<RequiresAuth><CheckoutPage /></RequiresAuth>} />
-        <Route path="/products" element= {<AllProductsPage />} />
+        <Route path="/products" element={<AllProductsPage />} />
       </Routes>
     </div>
   );

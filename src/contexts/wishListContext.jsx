@@ -1,6 +1,7 @@
 import { createContext, useContext } from "react";
 import { AuthContext } from "./authContext";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 export const WishListContext = createContext();
 
@@ -23,7 +24,16 @@ export const WishListHandler = ({ children }) => {
                     body: JSON.stringify({ product })
                 });
                 setWishlistedIds([...wishlistedIds, product?.id])
-                alert('Item added to wishlist')
+                toast.success(' Item added to wishlist', {
+                    position: "bottom-center",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                    });
             }
         } catch (error) {
             console.error(error);
@@ -39,7 +49,16 @@ export const WishListHandler = ({ children }) => {
                 headers: { authorization: encodedToken }
             });
             setWishlistedIds(wishlistedIds?.filter((id) => id !== productId ))
-            alert('Item removed from wishlist')
+            toast.warn('Item removed from wishlist', {
+                position: "bottom-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                });
         } catch (error) {
             console.error(error)
         }
