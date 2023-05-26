@@ -2,7 +2,6 @@ import { useContext, useEffect } from "react";
 import { AuthContext } from "./contexts/authContext";
 
 import { Route, Routes, Navigate, useLocation } from "react-router-dom";
-import Mockman from "mockman-js";
 
 import { HomePage } from "./pages/HomePage/HomePage";
 import { Header } from "./components/header/header";
@@ -46,7 +45,6 @@ function App() {
       />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/mockman" element={<Mockman />} />
         <Route path="/product/:productID" element={<ProductPage />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/category/:categoryName" element={<CategoryPage />} />
@@ -61,6 +59,7 @@ function App() {
         <Route path="/cart" element={<RequiresAuth><CartPage /></RequiresAuth>} />
         <Route path="/checkout" element={<RequiresAuth><CheckoutPage /></RequiresAuth>} />
         <Route path="/products" element={<AllProductsPage />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </div>
   );

@@ -5,6 +5,7 @@ import { ProductReducerContext } from '../../contexts/productReducerContext/prod
 import { CartContext } from '../../contexts/cartContext';
 import { Loader } from '../../components/loader/loader';
 import { toast } from 'react-toastify';
+import Confetti from 'react-confetti';
 
 export const CheckoutPage = () => {
     const encodedToken = localStorage?.getItem('encodedToken');
@@ -24,14 +25,19 @@ export const CheckoutPage = () => {
     let dd = expectedDate.getDate() + Math.floor(Math.random() * 7) + 3;
     let mm = expectedDate.getMonth() + 1;
     let yy = expectedDate.getFullYear();
+    if (dd >= 28) {
+        dd = (dd - 28) + 1
+        mm = Number(mm) + 1
+        if (mm === 12) {
+            mm = 1
+            yy = Number(yy) + 1
+        }
+    }
     if (dd <= 9) {
         dd = '0' + dd;
     }
     if (mm <= 9) {
         mm = '0' + mm;
-    }
-    if (dd >= 28) {
-        dd = (dd - 28) + 1
     }
     expectedDate = dd + '-' + mm + '-' + yy;
 
@@ -42,7 +48,7 @@ export const CheckoutPage = () => {
             setTimeout(() => {
                 setCartData([])
                 navigate("/");
-            }, 4000);
+            }, 4500);
         } else {
             toast.warn('It is essential to provide a valid shipping address', {
                 position: "bottom-center",
@@ -92,6 +98,7 @@ export const CheckoutPage = () => {
                             <p className="recipient-number">Phone Number: {selectedAddress?.phone}</p>
                         </div>
                     </div>
+                    <Confetti numberOfPieces={500} className='confetti'/>
                 </div>
                 :
                 !cartData

@@ -36,6 +36,11 @@
     align-items: center;
 }
 
+.checkout-page .modal-container .confetti {
+    width: 100%;
+    height: 100vh;
+}
+
 .checkout-page .modal-container .checkout-modal {
     box-shadow: rgba(0, 0, 0, 0.5) 0 0 8px;
     border-radius: 0.25rem;
