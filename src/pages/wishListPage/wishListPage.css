@@ -4,6 +4,13 @@
     }
 }
 
+@media only screen and (max-width: 760px) {
+    .wishlist-page .wishlist-products {
+        width: 18rem;
+        margin: auto;
+    }
+}
+
 @media only screen and (max-width: 420px) {
     .wishlist-page {
         margin-top: 6.5rem !important;

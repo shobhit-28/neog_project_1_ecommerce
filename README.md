@@ -19,6 +19,7 @@ $ npm start
 - Filter and sort products
 - Search product
 - Individual product page
+- Individual category page
 - Cart Managment
 - Wishlist managment
 - Address Managment

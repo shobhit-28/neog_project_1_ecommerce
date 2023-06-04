@@ -32,6 +32,11 @@
         display: none;
     }
 
+    .products-page .products .product-div .product-card-container {
+        width: 18rem;
+        margin: auto;
+    }
+
 }
 
 .products-front {
