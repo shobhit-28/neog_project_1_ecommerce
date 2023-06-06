@@ -275,7 +275,11 @@
 }
 
 .menu-links .menu-nav-links {
-    font-size: 0.8rem;
+    font-size: 1.2rem;
+}
+
+.menu-links .menu-nav-links .nav-link {
+    margin: 1rem 0;
 }
 
 /* nav-icons*/
