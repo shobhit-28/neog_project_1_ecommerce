@@ -100,7 +100,7 @@ export const CheckoutPage = () => {
                             <p className="recipient-address">{selectedAddress?.address}</p>
                             <p className="recipient-number">Phone Number: {selectedAddress?.phone}</p>
                         </div>
-                        <button className="go-to-home" onClick={() => goShoppingClickHandler()}> <FaArrowLeft /> Continue Shopping </button>
+                        <button className="go-to-home-btn" onClick={() => goShoppingClickHandler()}> <FaArrowLeft className='left-arrow' /> Continue Shopping </button>
                     </div>
                     <ConfettiExplosion className='confetti' force={1} particleCount={100} />
                 </div>

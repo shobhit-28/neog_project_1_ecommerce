@@ -47,7 +47,7 @@
 .checkout-page .modal-container .checkout-modal {
     box-shadow: rgba(0, 0, 0, 0.5) 0 0 8px;
     border-radius: 0.25rem;
-    padding: 1rem;
+    padding: 1rem 2rem;
 }
 
 .checkout-page .modal-container .checkout-modal .heading {
@@ -57,9 +57,51 @@
 }
 
 .checkout-page .modal-container .checkout-modal .details * {
-    font-size: 1.25rem;
     font-weight: 400;
     margin-bottom: 0.25rem;
+}
+
+.checkout-page .modal-container .checkout-modal .details .total-price, .checkout-page .modal-container .checkout-modal .details .eta {
+    font-size: 1.25rem;
+    margin: 1rem 0;
+}
+
+.checkout-page .modal-container .checkout-modal .details .declaration {
+    font-size: 1.25rem;
+}
+
+.checkout-page .modal-container .checkout-modal .details .recipient-name, .checkout-page .modal-container .checkout-modal .details .recipient-address, .checkout-page .modal-container .checkout-modal .details .recipient-number {
+    font-style: italic;
+}
+
+.checkout-page .modal-container .checkout-modal .go-to-home-btn {
+    font-size: 1.15rem;
+    border-radius: 0.25rem;
+    background-color: #000;
+    color: #fff;
+    padding: 0.5rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-width: 0.5px;
+    margin-top: 1.5rem;
+    transition: 0.65s;
+}
+
+.checkout-page .modal-container .checkout-modal .go-to-home-btn:hover {
+    color: #000;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.checkout-page .modal-container .checkout-modal .go-to-home-btn:active {
+    background-color: #000;
+    color: #fff;
+}
+
+.checkout-page .modal-container .checkout-modal .go-to-home-btn .left-arrow {
+    margin-right: 0.5rem;
 }
 
 .checkout-page .checkout-heading {
