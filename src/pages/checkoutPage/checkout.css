@@ -2,10 +2,12 @@
     .checkout-page {
         margin-top: 5.5rem !important;
     }
+
     .checkout-page .checkout-parent {
         flex-direction: column;
         width: 80% !important;
     }
+
     .checkout-page .modal-container {
         width: 80% !important;
         margin: auto;
@@ -16,9 +18,11 @@
     .checkout-page {
         margin-top: 6.5rem !important;
     }
+
     .checkout-page .checkout-parent .address-div {
         width: 80% !important;
     }
+
     .checkout-page .checkout-parent .checkout-card {
         width: 80% !important;
     }
@@ -37,8 +41,7 @@
 }
 
 .checkout-page .modal-container .confetti {
-    width: 100%;
-    height: 100vh;
+    margin: auto;
 }
 
 .checkout-page .modal-container .checkout-modal {
@@ -59,7 +62,7 @@
     margin-bottom: 0.25rem;
 }
 
-.checkout-page .checkout-heading {  
+.checkout-page .checkout-heading {
     font-size: 2rem;
     font-weight: 600;
     text-align: center;
@@ -81,17 +84,22 @@
     padding: 1rem;
     border-radius: 0.25rem;
     margin: 0.25rem;
+    transition: 0.75s;
+}
+
+.checkout-page .checkout-parent .address-div .radio-container:hover {
+    background-color: rgb(219, 234, 254);
 }
 
 .checkout-page .checkout-parent .address-div .address-label {
     cursor: pointer;
 }
 
-.checkout-page .checkout-parent .address-div .address-label .radio{
+.checkout-page .checkout-parent .address-div .address-label .radio {
     display: flex;
 }
 
-.checkout-page .checkout-parent .address-div .address-label .radio .name{
+.checkout-page .checkout-parent .address-div .address-label .radio .name {
     margin-left: 1rem;
 }
 
@@ -101,6 +109,7 @@
     width: 30%;
     margin: 1rem;
     padding: 0.5rem;
+    height: fit-content;
 }
 
 .checkout-page .checkout-parent .checkout-card .heading {
@@ -108,42 +117,47 @@
     font-weight: 500;
 }
 
-.checkout-page .checkout-parent .checkout-card .product-price-name{
+.checkout-page .checkout-parent .checkout-card .product-price-name {
     display: flex;
     margin: .25rem 0;
     justify-content: space-between;
 }
 
-.checkout-page .checkout-parent .checkout-card .product-price-name .item-title{
+.checkout-page .checkout-parent .checkout-card .product-price-name .item-title {
     margin-right: 1rem;
 }
 
 
-.checkout-page .checkout-parent .checkout-card .price-details{
+.checkout-page .checkout-parent .checkout-card .price-details {
     margin: 0.5rem 0 1rem;
     display: block;
 }
 
-.checkout-page .checkout-parent .checkout-card .price-details .price{
+.checkout-page .checkout-parent .checkout-card .price-details .price {
     display: flex;
     justify-content: space-between;
 }
-.checkout-page .checkout-parent .checkout-card .price-details .discount{
+
+.checkout-page .checkout-parent .checkout-card .price-details .discount {
     display: flex;
     justify-content: space-between;
 }
-.checkout-page .checkout-parent .checkout-card .price-details .delivery{
+
+.checkout-page .checkout-parent .checkout-card .price-details .delivery {
     display: flex;
     justify-content: space-between;
 }
-.checkout-page .checkout-parent .checkout-card .price-details .total-price{
+
+.checkout-page .checkout-parent .checkout-card .price-details .total-price {
     display: flex;
     justify-content: space-between;
 }
-.checkout-page .checkout-parent .checkout-card .address .heading{
+
+.checkout-page .checkout-parent .checkout-card .address .heading {
     margin-bottom: 0.45rem;
 }
-.checkout-page .checkout-parent .checkout-card .place-order{
+
+.checkout-page .checkout-parent .checkout-card .place-order {
     width: 100%;
     margin: 0.5rem 0 0.25rem;
     font-size: 1.25rem;

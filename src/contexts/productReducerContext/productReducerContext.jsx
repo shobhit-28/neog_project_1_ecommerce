@@ -25,6 +25,15 @@ export const ProductReducerHandler = ({ children }) => {
             address: 'Wayne Manor, Mountain Drive, Gotham',
             state: 'New Jersey'
         },
+        {
+            id: 2,
+            name: 'Tony Stark',
+            phone: '9876543210',
+            pin: '90265',
+            city: 'Malibu',
+            address: '10880 Malibu Point, Malibu',
+            state: 'California'
+        },
     ]
     };
 

@@ -5,7 +5,8 @@ import { ProductReducerContext } from '../../contexts/productReducerContext/prod
 import { CartContext } from '../../contexts/cartContext';
 import { Loader } from '../../components/loader/loader';
 import { toast } from 'react-toastify';
-import Confetti from 'react-confetti';
+import ConfettiExplosion from 'react-confetti-explosion';
+import { FaArrowLeft } from 'react-icons/fa'
 
 export const CheckoutPage = () => {
     const encodedToken = localStorage?.getItem('encodedToken');
@@ -45,10 +46,6 @@ export const CheckoutPage = () => {
         if (addressData?.length > 0) {
             setIsModalOpen(true)
             clearCart()
-            setTimeout(() => {
-                setCartData([])
-                navigate("/");
-            }, 4500);
         } else {
             toast.warn('It is essential to provide a valid shipping address', {
                 position: "bottom-center",
@@ -59,8 +56,13 @@ export const CheckoutPage = () => {
                 draggable: true,
                 progress: undefined,
                 theme: "dark",
-                });
+            });
         }
+    }
+
+    const goShoppingClickHandler = () => {
+        setCartData([])
+        navigate("/");
     }
 
     const fetchData = async () => {
@@ -87,6 +89,7 @@ export const CheckoutPage = () => {
         <div className="checkout-page">
             {isModalOpen ?
                 <div className="modal-container">
+                    <ConfettiExplosion className='confetti' force={1} particleCount={100} />
                     <div className="checkout-modal">
                         <p className="heading">Order Confirmed</p>
                         <div className="details">
@@ -97,8 +100,9 @@ export const CheckoutPage = () => {
                             <p className="recipient-address">{selectedAddress?.address}</p>
                             <p className="recipient-number">Phone Number: {selectedAddress?.phone}</p>
                         </div>
+                        <button className="go-to-home" onClick={() => goShoppingClickHandler()}> <FaArrowLeft /> Continue Shopping </button>
                     </div>
-                    <Confetti numberOfPieces={500} className='confetti'/>
+                    <ConfettiExplosion className='confetti' force={1} particleCount={100} />
                 </div>
                 :
                 !cartData
@@ -113,7 +117,18 @@ export const CheckoutPage = () => {
                                 <div className="checkout-parent">
 
                                     <div className="address-div">
-                                        {addressData?.map((address) => (
+                                        <div className="radio-container">
+                                            <label className="address-label" key={addressData[0]?.id} >
+                                                <section className="radio">
+                                                    <input type="radio" defaultChecked='true' name="address" id="" value={addressData[0]?.id} onClick={(event) => setSelectedAddressId(event?.target?.value)} />
+                                                    <p className="name">{addressData[0]?.name}</p>
+                                                </section>
+                                                <p className="address">{addressData[0]?.pin}, {addressData[0]?.address}</p>
+                                                <p className="city">{addressData[0]?.city}</p>
+                                                <p className="state">{addressData[0]?.state}</p>
+                                            </label>
+                                        </div>
+                                        {addressData?.filter(({ id }) => id > 1)?.map((address) => (
                                             <div className="radio-container">
                                                 <label className="address-label" key={address?.id} >
                                                     <section className="radio">
