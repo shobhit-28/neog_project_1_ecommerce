@@ -42,23 +42,61 @@ export const CheckoutPage = () => {
     }
     expectedDate = dd + '-' + mm + '-' + yy;
 
-    const orderHandler = () => {
+    const loadScript = async (url) => {
+        return new Promise((resolve) => {
+            const script = document.createElement('script');
+            script.src = url;
+
+            script.onload = () => {
+                resolve(true);
+            };
+
+            script.onerror = () => {
+                resolve(false);
+            };
+
+            document.body.appendChild(script);
+        });
+    };
+
+    const orderHandler = async () => {
         if (addressData?.length > 0) {
-            setIsModalOpen(true)
-            clearCart()
+            const res = await loadScript(
+                'https://checkout.razorpay.com/v1/checkout.js'
+            );
+
+            if (!res) {
+                toast.warn('Razorpay SDK failed to load, check you connection');
+                return;
+            }
+
+            const options = {
+                key: 'rzp_test_S4rnqY5F27wxrD',
+                amount: totalPrice * 100,
+                currency: 'INR',
+                name: 'Raj-Kart',
+                description: 'Thank you for shopping with us',
+                handler: function (response) {
+                    toast.success('Payment succesfull');
+                    setIsModalOpen(true)
+                    clearCart()
+                },
+                prefill: {
+                    name: 'Shobhit',
+                    email: 'shobhitraj34@gmail.com',
+                    contact: '9999999999',
+                },
+                theme: {
+                    color: '#000',
+                },
+            };
+            const paymentObject = new window.Razorpay(options);
+            paymentObject.open();
         } else {
-            toast.warn('It is essential to provide a valid shipping address', {
-                position: "bottom-center",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-            });
+            toast.warn('Please select or add new adress');
         }
-    }
+    };
+
 
     const goShoppingClickHandler = () => {
         setCartData([])
@@ -77,7 +115,7 @@ export const CheckoutPage = () => {
         }
     }
 
-    const totalPrice = Math.round(((cartData?.reduce((acc, curr) => acc + (curr?.price * curr?.qty), 0) - cartData?.reduce((acc, curr) => acc + ((curr?.price * (curr.discountPercentage / 100)) * curr?.qty), 0)) + Number.EPSILON) * 100) / 100
+    const totalPrice = 250 + Math.round(((cartData?.reduce((acc, curr) => acc + (curr?.price * curr?.qty), 0) - cartData?.reduce((acc, curr) => acc + ((curr?.price * (curr.discountPercentage / 100)) * curr?.qty), 0)) + Number.EPSILON) * 100) / 100
 
 
     useEffect(() => {
@@ -167,7 +205,7 @@ export const CheckoutPage = () => {
                                             </div>
                                             <div className="total-price">
                                                 <p className="total-price-heading">Total Price</p>
-                                                <p className="total-price">{`₹ ${totalPrice + 250}`}</p>
+                                                <p className="total-price">{`₹ ${totalPrice}`}</p>
                                             </div>
                                         </div>
                                         <div className="address">

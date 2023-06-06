@@ -43,7 +43,7 @@ export const PriceCard = ({ cartData }) => {
                 </div>
                 <div className="price-container">
                     <p className="price-heading">Total Price:</p>
-                    <p className="total-price">{`₹ ${Math.round(((cartData?.reduce((acc, curr) => acc + (curr?.price - (curr?.price * (curr?.discountPercentage / 100)) * curr?.qty), 0)) + Number.EPSILON) * 100) / 100}`}</p>
+                    <p className="total-price">{`₹ ${Math.round(((cartData?.reduce((acc, curr) => acc + (curr?.price * curr?.qty), 0) - cartData?.reduce((acc, curr) => acc + ((curr?.price * (curr.discountPercentage / 100)) * curr?.qty), 0)) + Number.EPSILON) * 100) / 100}`}</p>
                 </div>
                 <button className="checkout" onClick={() => navigateCheckOutHandler()} >Checkout</button>
             </div>
