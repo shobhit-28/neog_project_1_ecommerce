@@ -4,6 +4,7 @@ import { ProductReducerContext } from '../../contexts/productReducerContext/prod
 import { DataContext } from '../../contexts/dataContext';
 import { Products } from '../../components/products/products';
 import { Loader } from '../../components/loader/loader';
+import { FaFilter } from 'react-icons/fa';
 
 export const AllProductsPage = () => {
     const [isResponsiveFiltersOpen, setIsResponsiveFiltersOpen] = useState(false);
@@ -128,14 +129,10 @@ export const AllProductsPage = () => {
                                 <label onChange={ratingHandlerLoToHi}><input type="radio" name="rating" id="" />Sort Low to High</label>
                             </div>
                         </div>
-                        
-
-                        <p className="toggle-responsive-filters" onClick={() => setIsResponsiveFiltersOpen(!isResponsiveFiltersOpen)} >
-                            Filters
-                        </p>
                         <div className="filters">
                             {isResponsiveFiltersOpen && <>
-                                <div className="filters-div">
+                                <div className="responsive-filters-div">
+                                    <p className="filter-head">Filters</p>
                                     <div className="price-slider-div">
                                         {maxPrice &&
                                             <label className='price-slider'>
@@ -169,7 +166,6 @@ export const AllProductsPage = () => {
                                 </div>
                             </>}
                         </div>
-                        <hr className="divide-filters" />
 
                     </div>
                     <div className='products'>
@@ -198,6 +194,9 @@ export const AllProductsPage = () => {
                             }
                         </div>
                     </div>
+                    <button className="toggle-responsive-filters" onClick={() => setIsResponsiveFiltersOpen(!isResponsiveFiltersOpen)} >
+                        <FaFilter />
+                    </button>
                 </div>
             </div>
     )

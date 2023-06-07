@@ -6,6 +6,7 @@ import { DataContext } from '../../contexts/dataContext';
 import { Products } from '../../components/products/products';
 import { Loader } from '../../components/loader/loader';
 import 'react-toastify/dist/ReactToastify.css';
+import {FaFilter} from 'react-icons/fa'
 
 export const CategoryPage = () => {
     const { categoryName } = useParams();
@@ -149,12 +150,10 @@ export const CategoryPage = () => {
                             </div>
                         </div>
 
-                        <p className="toggle-responsive-filters" onClick={() => setIsResponsiveFiltersOpen(!isResponsiveFiltersOpen)} >
-                            Filters
-                        </p>
                         <div className="filters">
                             {isResponsiveFiltersOpen && <>
-                                <div className="filters-div">
+                                <div className="responsive-filters-div">
+                                <p className="filter-head">Filters</p>
                                     <div className="price-slider-div">
                                         {maxPrice &&
                                             <label className='price-slider'>
@@ -188,7 +187,6 @@ export const CategoryPage = () => {
                                 </div>
                             </>}
                         </div>
-                        <hr className="divide-filters" />
                     </div>
                     <div className='products'>
 
@@ -231,6 +229,9 @@ export const CategoryPage = () => {
                             }
                         </div>
                     </div>
+                    <button className="toggle-responsive-filters" onClick={() => setIsResponsiveFiltersOpen(!isResponsiveFiltersOpen)} >
+                        <FaFilter />
+                    </button>
                 </div>
             </div>
     )

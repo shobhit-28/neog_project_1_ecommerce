@@ -2,18 +2,25 @@
     .category-page .category-front {
         width: 100% !important;
     }
+    
+    .category-page .category-front {
+        width: 100% !important;
+    }
 
     .category-page .contents {
         flex-direction: column;
+        position: relative;
     }
 
     .category-page .category-title {
         font-size: 1.25rem !important;
     }
 
-    .category-page .category-filters .toggle-responsive-filters {
-        visibility: visible !important;
-        margin: 0.5rem 2rem !important;
+    .category-page .toggle-responsive-filters {
+        display: block !important;
+        position: fixed;
+        right: 1rem;
+        bottom: 1rem;
     }
 
     .category-page .filters:last-of-type {
@@ -23,9 +30,21 @@
     .category-page .filters:first-of-type {
         display: none;
     }
-
-    .category-page .divide-filters {
-        display: block !important;
+    
+    .category-page .filters {
+        width: 95% !important;
+    }
+    
+    .category-page .filters .responsive-filters-div{
+        width: 80% !important;
+        margin: auto !important;
+        padding: 0.25rem 1rem;
+        box-shadow: rgba(0, 0, 0, 0.2) 0 0 5px;
+        border-radius: 0.35rem;
+    }
+    
+    .category-page .filters .responsive-filters-div *{
+        font-size: 0.75rem !important;
     }
 
     .category-page .other-categories {
@@ -103,11 +122,6 @@
 
 /* Filters section */
 
-
-.category-page .divide-filters {
-    display: none;
-}
-
 .category-page .filters label {
     display: block;
 }
@@ -117,6 +131,11 @@
     padding: 0 1rem;
     margin: 1rem;
 }
+
+/* .category-page .filters .responsive-filters-div {
+    margin: 10rem;
+    border: 1px solid;
+} */
 
 .category-page .filters p {
     font-size: 1.05rem;
@@ -155,12 +174,20 @@
 .category-page .filters:last-of-type {
     display: none;
 }
-.category-page .category-filters .toggle-responsive-filters{
-        font-weight: 600;
+.category-page .toggle-responsive-filters{
         font-size: 1.2rem;
-        margin-bottom: 1rem;
-        margin: auto;
-        visibility: hidden;
+        display: none;
+        padding: 1rem;
+        border-radius: 100px;
+        background-color: #000;
+        color: #fff;
+        box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 13px;
+}
+
+.category-page .toggle-responsive-filters:active{
+        box-shadow: rgba(0, 0, 0, 0.5) 5px 5px 13px;
+        color: #000;
+        background-color: #fff;
 }
 
 /* products */
