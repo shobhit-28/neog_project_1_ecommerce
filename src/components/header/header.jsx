@@ -52,12 +52,18 @@ export const Header = () => {
 
     }
 
+    const handleKeyPressFunc = (event) => {
+        if (event.key === "Enter") {
+          searchClickHandler();
+        }
+      };
+
     return (
         <>
             <div className='header' >
                 <Link to='/' className="nav-head">Raj-Kart</Link>
                 <div className="search">
-                    <input type="text" name="search" id="search" placeholder="search" onChange={searchHandler} />
+                    <input type="text" name="search" id="search" placeholder="search" onChange={searchHandler} onKeyDown={handleKeyPressFunc} />
                     <button onClick={searchClickHandler}><FaSearch /></button>
                 </div>
                 <div className="menuButtons">
