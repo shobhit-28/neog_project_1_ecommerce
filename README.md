@@ -24,14 +24,17 @@ $ npm start
 - Wishlist managment
 - Address Managment
 - Checkout page
+- Payment gateway integration
 - Authentication:
   - User Signup
   - User Login
  - Fully Responsive
+ - Loaders and Toasts
 
 ## **Built with -**
 
 - React JS
 - React Context API + useReducer
 - React Router v6
-- Vanilla CSS 
+- Vanilla CSS
+- Razorpay payment gateway
