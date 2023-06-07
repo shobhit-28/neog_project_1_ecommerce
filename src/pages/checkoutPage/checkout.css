@@ -12,20 +12,28 @@
         width: 80% !important;
         margin: auto;
     }
+    .checkout-page .checkout-parent .address-div {
+        width: 80% !important;
+        height: 40vh;
+    }
+    
+    .checkout-page .checkout-parent .checkout-card {
+        width: 80% !important;
+    }
+
+    .checkout-page .address-modal-container .add-address-modal {
+        width: 80% !important;
+    }
 }
 
 @media only screen and (max-width: 420px) {
     .checkout-page {
         margin-top: 6.5rem !important;
     }
-
-    .checkout-page .checkout-parent .address-div {
-        width: 80% !important;
+    .checkout-page .address-modal-container .add-address-modal {
+        width: 90% !important;
     }
 
-    .checkout-page .checkout-parent .checkout-card {
-        width: 80% !important;
-    }
 }
 
 .checkout-page {
@@ -104,6 +112,92 @@
     margin-right: 0.5rem;
 }
 
+.checkout-page .address-modal-container {
+    position: fixed;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.checkout-page .address-modal-container .add-address-modal {
+    padding: 1rem;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 13px;
+    width: 50%;
+    border-radius: 0.45rem;
+}
+
+.checkout-page .address-modal-container .add-address-modal * {
+    font-size: 1.25rem;
+    margin: 0.15rem 0;
+    /* padding: 0.5rem; */
+}
+
+.checkout-page .address-modal-container .add-address-modal .two-inp-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.checkout-page .address-modal-container .add-address-modal .name-input {
+    width: 100%;
+    padding: 0.5rem;
+
+}
+
+.checkout-page .address-modal-container .add-address-modal .phone-input {
+    width: 48%;
+    padding: 0.5rem;
+}
+
+.checkout-page .address-modal-container .add-address-modal .pincode-input {
+    width: 48%;
+    padding: 0.5rem;
+}
+
+.checkout-page .address-modal-container .add-address-modal .city-input {
+    width: 48%;
+    padding: 0.5rem;
+}
+
+.checkout-page .address-modal-container .add-address-modal .state-input {
+    width: 48%;
+    padding: 0.5rem;
+}
+
+.checkout-page .address-modal-container .add-address-modal textarea {
+    font-size: 1.05rem;
+    resize: none;
+}
+
+.checkout-page .address-modal-container .add-address-modal .add-address-btn, .checkout-page .address-modal-container .add-address-modal .cancel-add-address {
+    width: 50%;
+    border-radius: 0.25rem;
+    border-width: 0.25px;
+    transition: 0.75s;
+    background-color: #000;
+    color: #fff;
+    padding: 0.5rem;
+}
+
+.checkout-page .address-modal-container .add-address-modal .add-address-btn:hover, .checkout-page .address-modal-container .add-address-modal .cancel-add-address:hover {
+    cursor: pointer;
+    color: #000;
+    background-color: #fff;
+}
+
+.checkout-page .address-modal-container .add-address-modal .add-address-btn:active, .checkout-page .address-modal-container .add-address-modal .cancel-add-address:active {
+    background-color: #000;
+    color: #fff;
+}
+
+.checkout-page .checkout {
+    position: relative;
+}
+
 .checkout-page .checkout-heading {
     font-size: 2rem;
     font-weight: 600;
@@ -119,6 +213,8 @@
 .checkout-page .checkout-parent .address-div {
     width: 50%;
     margin: 1rem;
+    max-height: 70vh;
+    overflow: auto;
 }
 
 .checkout-page .checkout-parent .address-div .radio-container {
@@ -127,6 +223,31 @@
     border-radius: 0.25rem;
     margin: 0.25rem;
     transition: 0.75s;
+}
+
+.checkout-page .checkout-parent .address-div .add-address {
+    width: 80%;
+    margin: auto;
+    display: block;
+    font-size: 1.25rem;
+    border-radius: 0.25rem;
+    border-width: 0.25px;
+    transition: 0.5s;
+    background-color: #000;
+    color: #fff;
+    padding: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.checkout-page .checkout-parent .address-div .add-address:hover {
+    background-color: #fff;
+    color: #000;
+    cursor: pointer;
+}
+
+.checkout-page .checkout-parent .address-div .add-address:active {
+    color: #fff;
+    background-color: #000;
 }
 
 .checkout-page .checkout-parent .address-div .radio-container:hover {

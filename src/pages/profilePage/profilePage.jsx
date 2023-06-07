@@ -129,6 +129,14 @@ export const ProfilePage = () => {
         if (addAddressData?.address?.length > 0 && addAddressData?.state?.length > 0 && addAddressData?.city?.length > 0 && addAddressData?.pin?.length > 0 && addAddressData?.phone?.length > 0 && addAddressData?.name?.length > 0) {
             addAddress(addAddressData)
             setAddAddressOpen(false)
+            setAddAddressData({
+                name: '',
+                phone: '',
+                pin: '',
+                city: '',
+                address: '',
+                state: ''
+            })
         } else {
             toast.warn('All fields are necessary', {
                 position: "bottom-center",

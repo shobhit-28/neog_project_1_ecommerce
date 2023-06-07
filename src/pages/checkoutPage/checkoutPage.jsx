@@ -11,12 +11,21 @@ import { FaArrowLeft } from 'react-icons/fa'
 export const CheckoutPage = () => {
     const encodedToken = localStorage?.getItem('encodedToken');
 
-    const { addressData } = useContext(ProductReducerContext);
+    const { addressData, addAddress } = useContext(ProductReducerContext);
     const { clearCart } = useContext(CartContext);
 
     const [cartData, setCartData] = useState(undefined);
     const [selectedAddressId, setSelectedAddressId] = useState(addressData[0].id)
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isAddressModalOpen, setIsAddressModalOpen] = useState(false)
+    const [addAddressData, setAddAddressData] = useState({
+        name: '',
+        phone: '',
+        pin: '',
+        city: '',
+        address: '',
+        state: ''
+    })
 
     const selectedAddress = addressData?.find(({ id }) => id === Number(selectedAddressId))
 
@@ -97,6 +106,68 @@ export const CheckoutPage = () => {
         }
     };
 
+    const nameAddHandler = (event) => {
+        setAddAddressData({
+            ...addAddressData,
+            name: event?.target?.value
+        })
+    }
+    const phoneAddHandler = (event) => {
+        setAddAddressData({
+            ...addAddressData,
+            phone: event?.target?.value
+        })
+    }
+    const pinAddHandler = (event) => {
+        setAddAddressData({
+            ...addAddressData,
+            pin: event?.target?.value
+        })
+    }
+    const cityAddHandler = (event) => {
+        setAddAddressData({
+            ...addAddressData,
+            city: event?.target?.value
+        })
+    }
+    const addressAddHandler = (event) => {
+        setAddAddressData({
+            ...addAddressData,
+            address: event?.target?.value
+        })
+    }
+    const stateAddHandler = (event) => {
+        setAddAddressData({
+            ...addAddressData,
+            state: event?.target?.value
+        })
+    }
+
+    const addAddressClickHandler = () => {
+        if (addAddressData?.address?.length > 0 && addAddressData?.state?.length > 0 && addAddressData?.city?.length > 0 && addAddressData?.pin?.length > 0 && addAddressData?.phone?.length > 0 && addAddressData?.name?.length > 0) {
+            addAddress(addAddressData)
+            setIsAddressModalOpen(false)
+            setAddAddressData({
+                name: '',
+                phone: '',
+                pin: '',
+                city: '',
+                address: '',
+                state: ''
+            })
+        } else {
+            toast.warn('All fields are necessary', {
+                position: "bottom-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+        }
+    }
 
     const goShoppingClickHandler = () => {
         setCartData([])
@@ -148,12 +219,29 @@ export const CheckoutPage = () => {
                     <Loader />
                     :
                     <>
+                        {isAddressModalOpen &&
+                            <div className="address-modal-container">
+                                <div className="add-address-modal">
+                                    <input type="text" name="" id="" placeholder='name' className="name-input" onChange={nameAddHandler} />
+                                    <div className="two-inp-container">
+                                        <input type="number" name="" id="" placeholder='phone' className="phone-input" onChange={phoneAddHandler} />
+                                        <input type="number" name="" id="" placeholder='pin-code' className="pincode-input" onChange={pinAddHandler} />
+                                    </div>
+                                    <div className="two-inp-container">
+                                        <input type="text" name="" id="" placeholder='city' className="city-input" onChange={cityAddHandler} />
+                                        <input type="text" name="" id="" placeholder='state' className="state-input" onChange={stateAddHandler} />
+                                    </div>
+                                    <textarea name="" id="" cols="10" rows="10" placeholder='address' onChange={addressAddHandler}></textarea>
+                                    <button className="add-address-btn" onClick={addAddressClickHandler}>Add address</button>
+                                    <button className="cancel-add-address" onClick={() => setIsAddressModalOpen(false)} >Cancel</button>
+                                </div>
+                            </div>
+                        }
                         {cartData?.length > 0
                             ?
-                            <>
+                            <div className='checkout'>
                                 <h1 className="checkout-heading">Checkout</h1>
                                 <div className="checkout-parent">
-
                                     <div className="address-div">
                                         <div className="radio-container">
                                             <label className="address-label" key={addressData[0]?.id} >
@@ -179,6 +267,7 @@ export const CheckoutPage = () => {
                                                 </label>
                                             </div>
                                         ))}
+                                        <button className="add-address" onClick={() => setIsAddressModalOpen(true)}>Add address</button>
                                     </div>
 
                                     <div className="checkout-card">
@@ -217,7 +306,7 @@ export const CheckoutPage = () => {
                                     </div>
 
                                 </div>
-                            </>
+                            </div>
                             :
                             <Navigate to='/' />
                         }
