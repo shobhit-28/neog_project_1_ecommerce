@@ -39,6 +39,6 @@ $ npm start
 - Vanilla CSS
 - Razorpay payment gateway
 
-## **Built with -**
+## **Demo -**
 
 https://www.loom.com/share/15410a4a37464cb697a426e4ea452f4e
