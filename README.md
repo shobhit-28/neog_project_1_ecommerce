@@ -41,4 +41,5 @@ $ npm start
 
 ## **Demo -**
 
-https://www.loom.com/share/15410a4a37464cb697a426e4ea452f4e
+https://github.com/shobhit-28/neog_project_1_ecommerce/assets/92620327/d83fddbe-37d7-4945-897f-26c3e18b605a
+
